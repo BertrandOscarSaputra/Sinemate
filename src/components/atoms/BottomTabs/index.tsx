@@ -4,7 +4,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Live from '../../../pages/Live'; // Your Live screen
 import Profile from '../../../pages/Profile'; // Your Profile screen
 import Room from '../../../pages/Room';
-import {MiddlePoint} from '../../../assets/';
+import {
+  MiddlePoint,
+  LiveIcon,
+  LiveIconIn,
+  ProfileIcon,
+  ProfileIconIn,
+} from '../../../assets/';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,8 +34,20 @@ const BottomTabs = () => {
       <Tab.Screen
         name="Live"
         component={Live}
-        options={{tabBarLabel: 'Live'}}
+        options={{
+          tabBarLabel: 'Live',
+          tabBarIcon: ({focused}) => (
+            <View>
+              {focused ? (
+                <LiveIcon style={styles.icon} />
+              ) : (
+                <LiveIconIn style={styles.icon} />
+              )}
+            </View>
+          ),
+        }}
       />
+
       <Tab.Screen
         name="Room"
         component={Room}
@@ -46,7 +64,18 @@ const BottomTabs = () => {
       <Tab.Screen
         name="Profile"
         component={Profile}
-        options={{tabBarLabel: 'Profile'}}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({focused}) => (
+            <View>
+              {focused ? (
+                <ProfileIconIn style={styles.icon} />
+              ) : (
+                <ProfileIcon style={styles.icon} />
+              )}
+            </View>
+          ),
+        }}
       />
     </Tab.Navigator>
   );
@@ -75,6 +104,5 @@ const styles = StyleSheet.create({
   icon: {
     width: 30,
     height: 30,
-    tintColor: 'white', // or remove this if your image is colored
   },
 });
