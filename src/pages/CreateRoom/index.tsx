@@ -1,14 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const Room = () => {
+const CreateRoom = () => {
   return (
     <View>
-      <Text>Room</Text>
+      <Text>Create</Text>
     </View>
   );
 };
 
-export default Room;
+export default CreateRoom;
 
 const styles = StyleSheet.create({});

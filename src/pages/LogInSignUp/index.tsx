@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
-import {Button} from '../../components/atoms'; // ✅ make sure your custom Button works with label + onPress
+import {Button, Gap} from '../../components/atoms';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Logo, Logos} from '../../assets';
@@ -10,8 +10,13 @@ const LogInSignUp = () => {
   return (
 
     <View style={styles.container}>
+<<<<<<< HEAD
       <Logos style={styles.Logo}/>
       <Button label="Log In" onPress={() => navigation.navigate('LogIn')} />jakarta04
+=======
+      <Button label="Log In" onPress={() => navigation.navigate('LogIn')} />
+      <Gap height={20} />
+>>>>>>> 0ea02a846466d055ddaeafe8aa3c7a8811c5ce61
       <Button label="Sign Up" onPress={() => navigation.navigate('SignUp')} />
     </View>
   );
