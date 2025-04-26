@@ -17,8 +17,9 @@ const CustomHeader = () => {
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flex: '1',
+    alignItems: 'flex-start',
+    justifyContent:'flex-start',
     padding: 16,
     backgroundColor: '#000000',
   },
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     resizeMode: 'contain',
+    color:'white',
   },
 });
 

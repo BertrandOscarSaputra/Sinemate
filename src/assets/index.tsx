@@ -1,5 +1,5 @@
 import Logo from './Logo.svg';
-import ProfileIcon from './Profile.svg';
+import ProfileIcon from './profile.svg';
 import ProfileIconIn from './ProfileIconIn.svg';
 import LiveIcon from './LiveIcon.svg';
 import LiveIconIn from './LiveIconIn.svg';
