@@ -17,12 +17,14 @@ const LogIn = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <BackArrow title="Log In" />
-      <Gap height={20} />
-      <TextInput label="Username" placeholder="Type your username" />
-      <Gap height={20} />
-      <Button label="Log In" onPress={handleLogin} />
+    <View style={styles.pageContainer}>
+      <View>
+        <BackArrow title="Log In" />
+        <Gap height={20} />
+        <TextInput label="Email" placeholder="Enter your email" />
+        <Gap height={20} />
+        <Button label="Log In" onPress={handleLogin} />
+      </View>
     </View>
   );
 };
@@ -30,7 +32,7 @@ const LogIn = () => {
 export default LogIn;
 
 const styles = StyleSheet.create({
-  container: {
+  pageContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

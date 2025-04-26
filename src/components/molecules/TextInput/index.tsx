@@ -3,9 +3,13 @@ import React from 'react';
 
 const TextInput = ({label, placeholder}) => {
   return (
-    <View>
-      <Text style={styles.label}>{label}</Text>
-      <Input placeholder={placeholder} style={styles.input} />
+    <View style={styles.container}>
+      {label && <Text style={styles.label}>{label}</Text>}
+      <Input
+        placeholder={placeholder}
+        style={styles.input}
+        placeholderTextColor="#8e8e93"
+      />
     </View>
   );
 };
@@ -13,15 +17,21 @@ const TextInput = ({label, placeholder}) => {
 export default TextInput;
 
 const styles = StyleSheet.create({
+  container: {
+    marginBottom: 16,
+  },
   label: {
     fontFamily: 'Poppins-Regular',
     fontSize: 16,
     marginBottom: 6,
+    color: '#000', // make sure label text is visible
   },
   input: {
-    borderWidth: 1,
     borderColor: '#020202',
+    borderWidth: 1, // you need this for the border to appear
     borderRadius: 8,
     padding: 10,
+    backgroundColor: '#fff', // white input background
+    color: '#000', // black text
   },
 });
