@@ -1,21 +1,26 @@
 import {StyleSheet, Text, View} from 'react-native';
-import {Button, Gap} from '../../components/atoms';
 import React from 'react';
+import {Button, Gap} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
 
-const LogInSignUp = () => {
+const Middle = () => {
   const navigation = useNavigation();
-
   return (
     <View style={styles.container}>
-      <Button label="Log In" onPress={() => navigation.navigate('LogIn')} />
+      <Button
+        label="Create Room"
+        onPress={() => navigation.navigate('CreateRoom')}
+      />
       <Gap height={20} />
-      <Button label="Sign Up" onPress={() => navigation.navigate('SignUp')} />
+      <Button
+        label="Join Room"
+        onPress={() => navigation.navigate('JoinRoom')}
+      />
     </View>
   );
 };
 
-export default LogInSignUp;
+export default Middle;
 
 const styles = StyleSheet.create({
   container: {

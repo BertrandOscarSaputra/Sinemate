@@ -1,7 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Button, BackArrow} from '../../components/atoms'; // your custom button
+import {Button, Gap, BackArrow} from '../../components/atoms'; // your custom button
 import {useNavigation} from '@react-navigation/native';
+import {TextInput} from '../../components/molecules';
 
 const LogIn = () => {
   const navigation = useNavigation();
@@ -9,12 +10,18 @@ const LogIn = () => {
   const handleLogin = () => {
     // Here you'd normally check credentials or call an API
     // For now we simulate success and go to main app
-    navigation.replace('MainApp'); // ✅ This replaces the screen with the bottom tabs
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'MainApp'}],
+    });
   };
 
   return (
     <View style={styles.container}>
       <BackArrow title="Log In" />
+      <Gap height={20} />
+      <TextInput label="Username" placeholder="Type your username" />
+      <Gap height={20} />
       <Button label="Log In" onPress={handleLogin} />
     </View>
   );

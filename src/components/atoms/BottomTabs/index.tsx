@@ -3,7 +3,7 @@ import {Image, View, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Live from '../../../pages/Live'; // Your Live screen
 import Profile from '../../../pages/Profile'; // Your Profile screen
-import Room from '../../../pages/Room';
+import Middle from '../../../pages/Middle';
 import {
   MiddlePoint,
   LiveIcon,
@@ -22,7 +22,6 @@ const BottomTabs = () => {
         tabBarStyle: {
           backgroundColor: '#353535', // Tab bar background color
           height: 60,
-          paddingBottom: 5,
         },
         tabBarLabelStyle: {
           fontSize: 14, // Font size for the labels
@@ -49,8 +48,8 @@ const BottomTabs = () => {
       />
 
       <Tab.Screen
-        name="Room"
-        component={Room}
+        name="Middle"
+        component={Middle}
         options={{
           tabBarLabel: '', // Hide label to make room for the button
           tabBarIcon: ({focused}) => (
