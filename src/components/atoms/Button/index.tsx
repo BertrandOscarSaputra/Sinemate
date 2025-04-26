@@ -18,12 +18,21 @@ const styles = StyleSheet.create({
   button: color => ({
     backgroundColor: color,
     borderRadius: 8,
+<<<<<<< HEAD
+    paddingVertical: 10,
+    height:50,
+    width:280,
+    marginBottom:38,
+
+=======
     padding: 12,
+>>>>>>> 0ea02a846466d055ddaeafe8aa3c7a8811c5ce61
   }),
   label: textColor => ({
     textAlign: 'center',
     fontFamily: 'Poppins-Medium',
-    fontSize: 14,
+    fontSize: 20,
+    fontWeight: '600',
     color: textColor,
   }),
 });

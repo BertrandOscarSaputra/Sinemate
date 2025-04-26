@@ -8,7 +8,7 @@ const SplashScreen = ({navigation}) => {
   }, []);
   return (
     <View style={styles.container}>
-      <Logos />
+      <Logos/>
     </View>
   );
 };
