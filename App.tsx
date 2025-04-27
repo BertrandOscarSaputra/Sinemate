@@ -5,6 +5,8 @@ import LogIn from './src/pages/LogIn';
 import SignUp from './src/pages/SignUp';
 import CreateRoom from './src/pages/CreateRoom';
 import JoinRoom from './src/pages/JoinRoom';
+import Room from './src/pages/Room';
+import SearchPage from './src/pages/SearchPage';
 
 import BottomTabs from './src/components/atoms/BottomTabs';
 import {NavigationContainer} from '@react-navigation/native';
@@ -49,6 +51,16 @@ const App = () => {
         <Stack.Screen
           name="JoinRoom"
           component={JoinRoom}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Room"
+          component={Room}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SearchPage"
+          component={SearchPage}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

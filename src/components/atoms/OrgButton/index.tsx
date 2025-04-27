@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 
-const Button = ({label, color = '#2c2c2c', textColor = '#fff', onPress}) => {
+const OrgButton = ({label, color = '#9B3922', textColor = '#fff', onPress}) => {
   return (
     <TouchableOpacity
       style={styles.button(color)}
@@ -12,22 +12,19 @@ const Button = ({label, color = '#2c2c2c', textColor = '#fff', onPress}) => {
   );
 };
 
-export default Button;
+export default OrgButton;
 
 const styles = StyleSheet.create({
-  button: (color: string): ViewStyle => ({
+  button: color => ({
+    alignItems: 'center',
     backgroundColor: color,
-    borderRadius: 8,
-    paddingVertical: 10,
-    height:50,
-    width:280,
-    marginBottom:38,
-    padding: 12,
-
+    paddingVertical: 6,
+    marginBottom: 38,
+    borderRadius: 30,
   }),
   label: textColor => ({
     textAlign: 'center',
-    fontFamily: 'Poppins-Medium',
+    fontFamily: 'Poppins-SemiBold',
     fontSize: 20,
     fontWeight: '600',
     color: textColor,

@@ -4,14 +4,14 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import { Image } from 'react-native';
 
+
 const LogInSignUp = () => {
   const navigation = useNavigation();
 
   return (
-
     <View style={styles.container}>
       <Image source={require('../../assets/Logo.png')} style={styles.Logo}/>
-      <Button label="Log In" onPress={() => navigation.navigate('LogIn')} />jakarta04
+      <Button label="Log In" onPress={() => navigation.navigate('LogIn')} />
       <Button label="Sign Up" onPress={() => navigation.navigate('SignUp')} />
     </View>
   );
@@ -31,6 +31,4 @@ const styles = StyleSheet.create({
     height: 295,
     marginBottom: 50,
   },
-
-
 });
