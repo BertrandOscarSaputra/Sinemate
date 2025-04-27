@@ -1,12 +1,11 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet, View} from 'react-native';
-import {MiddlePoint} from '../../../assets/';
+import {TouchableOpacity, StyleSheet, View, Image } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 const Middle = ({onPress}) => {
   return (
     <TouchableOpacity style={styles.middlePoint} onPress={onPress}>
-      <MiddlePoint />
+      <Image source={require('../../../assets/MiddlePoint.png')} style={styles.icon} />
     </TouchableOpacity>
   );
 };

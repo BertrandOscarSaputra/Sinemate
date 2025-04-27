@@ -18,20 +18,20 @@ export default TextInput;
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 16,
+    marginBottom: 36,
   },
   label: {
     fontFamily: 'Poppins-Regular',
     fontSize: 16,
     marginBottom: 6,
-    color: '#000', // make sure label text is visible
+    color: '#8E8E8E', // make sure label text is visible
   },
   input: {
     borderColor: '#020202',
-    borderWidth: 1, // you need this for the border to appear
-    borderRadius: 8,
+    borderWidth: 10, // you need this for the border to appear
+    borderRadius: 20,
     padding: 10,
-    backgroundColor: '#fff', // white input background
+    backgroundColor: '#1F1F1F', // white input background
     color: '#000', // black text
   },
 });

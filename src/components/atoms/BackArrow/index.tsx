@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Arrow} from '../../../assets';
 
 const CustomHeader = () => {
   const navigation = useNavigation();
@@ -9,7 +8,7 @@ const CustomHeader = () => {
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Arrow />
+        <Image source={require('../../../assets/Arrow.png')} style={styles.icon} />
       </TouchableOpacity>
     </View>
   );
@@ -23,9 +22,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
   },
   icon: {
-    width: 24,
-    height: 24,
+    width: 32,
+    height: 32,
     resizeMode: 'contain',
+    marginBottom:50,
   },
 });
 

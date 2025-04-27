@@ -1,16 +1,6 @@
 import React from 'react';
 import {Image, View, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Live from '../../../pages/Live'; // Your Live screen
-import Profile from '../../../pages/Profile'; // Your Profile screen
-import Middle from '../../../pages/Middle';
-import {
-  MiddlePoint,
-  LiveIcon,
-  LiveIconIn,
-  ProfileIcon,
-  ProfileIconIn,
-} from '../../../assets/';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,9 +28,9 @@ const BottomTabs = () => {
           tabBarIcon: ({focused}) => (
             <View>
               {focused ? (
-                <LiveIcon style={styles.icon} />
+                <Image source={require('../../../assets/LiveOff.png')} style={styles.icon} />
               ) : (
-                <LiveIconIn style={styles.icon} />
+                <Image source={require('../../../assets/LiveOff.png')} style={styles.icon} />
               )}
             </View>
           ),
@@ -54,7 +44,7 @@ const BottomTabs = () => {
           tabBarLabel: '', // Hide label to make room for the button
           tabBarIcon: ({focused}) => (
             <View style={[styles.circleButton, focused && styles.activeCircle]}>
-              <MiddlePoint style={styles.icon} />
+              <Image source={require('../../../assets/MiddlePoint.png')} style={styles.icon} />
             </View>
           ),
         }}
