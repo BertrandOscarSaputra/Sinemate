@@ -6,8 +6,7 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import {TextInputCreate} from '../../components/molecules';
-import {Gap, BackArrowSearch, OrgButton} from '../../components/atoms';
+import {Gap, BackArrowSearch} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
 
 const SearchPage = () => {

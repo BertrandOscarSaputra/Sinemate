@@ -39,7 +39,7 @@ const CreateRoom = () => {
         <Gap height={40} />
         <OrgButton
           label={'Create'}
-          onPress={() => navigation.navigate('Room')}
+          onPress={() => navigation.navigate('LiveRoom')}
         />
       </View>
     </ScrollView>
