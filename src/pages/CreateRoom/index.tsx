@@ -8,8 +8,10 @@ import {
 import React from 'react';
 import {TextInputCreate} from '../../components/molecules';
 import {Gap, BackArrow, OrgButton} from '../../components/atoms';
+import {useNavigation} from '@react-navigation/native';
 
 const CreateRoom = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView style={styles.container}>
       {/* Back Arrow at top */}
@@ -35,7 +37,10 @@ const CreateRoom = () => {
           placeholder={'Enter youtube link...'}
         />
         <Gap height={40} />
-        <OrgButton label={'Create'} />
+        <OrgButton
+          label={'Create'}
+          onPress={() => navigation.navigate('Room')}
+        />
       </View>
     </ScrollView>
   );

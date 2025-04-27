@@ -1,16 +1,11 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Image,
-} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, Image} from 'react-native';
 import React from 'react';
 import {TextInputCreate} from '../../components/molecules';
 import {Gap, BackArrow, OrgButton} from '../../components/atoms';
+import {useNavigation} from '@react-navigation/native';
 
 const JoinRoom = () => {
+  const navigation = useNavigation();
   return (
     <ScrollView style={styles.container}>
       {/* Back Arrow at top */}

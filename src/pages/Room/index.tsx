@@ -1,14 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const Join = () => {
+const Room = () => {
   return (
     <View>
-      <Text>Join</Text>
+      <Text>Room</Text>
     </View>
   );
 };
 
-export default Join;
+export default Room;
 
 const styles = StyleSheet.create({});
