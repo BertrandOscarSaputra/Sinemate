@@ -1,4 +1,4 @@
-import TextInput from './TextInput/index';
 import TextInputCreate from './TextInputCreate/index';
+import Search from './Search/index';
 
-export {TextInput, TextInputCreate};
+export {TextInputCreate, Search};

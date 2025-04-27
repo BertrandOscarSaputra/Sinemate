@@ -7,6 +7,8 @@ import Logos from './Lowgos.svg';
 import Arrow from './arrow.svg';
 import MiddlePoint from './MiddlePoint.svg';
 import Illust from './Illust.svg';
+import Sinemate from './Sinemate.svg';
+import Glass from './glass.svg';
 
 export {
   Logo,
@@ -18,4 +20,6 @@ export {
   LiveIconIn,
   ProfileIconIn,
   Illust,
+  Sinemate,
+  Glass,
 };

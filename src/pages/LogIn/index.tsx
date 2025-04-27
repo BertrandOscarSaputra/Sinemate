@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Button, Gap, BackArrow} from '../../components/atoms'; // your custom button
 import {useNavigation} from '@react-navigation/native';
-import {TextInput} from '../../components/molecules';
+import {TextInputCreate} from '../../components/molecules';
 
 const LogIn = () => {
   const navigation = useNavigation();
@@ -20,8 +20,6 @@ const LogIn = () => {
     <View style={styles.pageContainer}>
       <View>
         <BackArrow title="Log In" />
-        <Gap height={20} />
-        <TextInput label="Email" placeholder="Enter your email" />
         <Gap height={20} />
         <Button label="Log In" onPress={handleLogin} />
       </View>

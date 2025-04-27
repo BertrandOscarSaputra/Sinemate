@@ -1,12 +1,27 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
-import {MiddlePoint} from '../../components/atoms';
+import {Search, TextInputCreate} from '../../components/molecules';
+import {Gap} from '../../components/atoms';
+import {useNavigation} from '@react-navigation/native';
 
 const Live = () => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Live</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      {/* Back Arrow at top */}
+      <View style={styles.header}>
+        <Search />
+      </View>
+      <Gap height={20} />
+
+      {/* Centered Inputs */}
+      <View style={styles.content}>
+        <TextInputCreate
+          label={'Room Code'}
+          placeholder={'Enter room code...'}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
@@ -15,13 +30,15 @@ export default Live;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#000000',
   },
-  text: {
-    fontSize: 24,
-    fontFamily: 'Poppins-Medium',
-    color: '#FFFFFF',
+  header: {
+    paddingTop: 40, // Status bar height + some margin
+    paddingHorizontal: 20,
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center', // Center vertically
+    paddingHorizontal: 20,
   },
 });
