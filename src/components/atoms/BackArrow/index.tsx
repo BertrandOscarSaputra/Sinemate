@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-<<<<<<< HEAD
     padding: 16,
     backgroundColor: '#000000',
   },
@@ -28,17 +27,6 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     resizeMode: 'contain',
-=======
-    padding: 20,
-    backgroundColor: '#000000',
-  },
-  title: {
-    color: '#fff',
-    marginLeft: 60,
-    paddingTop: 10,
-    fontFamily: 'Poppins-Bold',
-    fontSize: 24,
->>>>>>> bertrand/change
   },
 });
 
