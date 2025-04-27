@@ -1,18 +1,22 @@
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
-import {Search, TextInputCreate} from '../../components/molecules';
-import {Gap} from '../../components/atoms';
+import {Gap, BackArrowSearch} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
 
-const Live = () => {
+const SearchPage = () => {
   const navigation = useNavigation();
   return (
     <ScrollView style={styles.container}>
-      {/* Back Arrow at top */}
-      <View style={styles.header}>
-        <Search />
+      <Gap height={40} />
+      <View>
+        <BackArrowSearch />
       </View>
-      <Gap height={20} />
 
       {/* Centered Inputs */}
       <View style={styles.content}></View>
@@ -20,7 +24,7 @@ const Live = () => {
   );
 };
 
-export default Live;
+export default SearchPage;
 
 const styles = StyleSheet.create({
   container: {

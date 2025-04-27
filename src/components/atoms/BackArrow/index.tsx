@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Arrow} from '../../../assets';
 
-const CustomHeader = () => {
+const CustomHeader = ({title}) => {
   const navigation = useNavigation();
 
   return (
@@ -11,6 +11,7 @@ const CustomHeader = () => {
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Arrow />
       </TouchableOpacity>
+      <Text style={styles.title}>{title}</Text>
     </View>
   );
 };
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+<<<<<<< HEAD
     padding: 16,
     backgroundColor: '#000000',
   },
@@ -26,6 +28,17 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     resizeMode: 'contain',
+=======
+    padding: 20,
+    backgroundColor: '#000000',
+  },
+  title: {
+    color: '#fff',
+    marginLeft: 60,
+    paddingTop: 10,
+    fontFamily: 'Poppins-Bold',
+    fontSize: 24,
+>>>>>>> bertrand/change
   },
 });
 
