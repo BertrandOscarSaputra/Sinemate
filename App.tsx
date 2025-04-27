@@ -7,6 +7,7 @@ import CreateRoom from './src/pages/CreateRoom';
 import JoinRoom from './src/pages/JoinRoom';
 import LiveRoom from './src/pages/LiveRoom';
 import SearchPage from './src/pages/SearchPage';
+import Live from './src/pages/Live'; // Import the missing Live component
 
 import BottomTabs from './src/components/atoms/BottomTabs';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
@@ -48,6 +49,11 @@ const App = () => {
           component={SignUp}
           options={{headerShown: false}}
         />
+        <Stack.Screen 
+          name="Live" 
+          component={Live}
+          options={{headerShown: false}}
+         />
         <Stack.Screen
           name="MainApp"
           component={BottomTabs}

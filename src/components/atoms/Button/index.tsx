@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: 280,
     marginBottom: 38,
+    alignSelf: 'center',
   }),
   label: textColor => ({
     textAlign: 'center',

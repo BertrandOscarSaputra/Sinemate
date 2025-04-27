@@ -21,12 +21,13 @@ const LogIn = () => {
       <Gap height={30} />
 
       <View style={styles.inputContainer}>
-        <Image source={require('../../assets/Message.png')} style={styles.inputIcon} />
-        <TextInput
-          placeholder="Enter your username"
-          placeholderTextColor="#aaa"
-          style={styles.textInput}
-        />
+        <Image source={require('../../assets/Profilegold.png')} style={styles.inputIcon} />
+          <TextInput
+            placeholder="Enter your username"
+            placeholderTextColor="#aaa"
+            secureTextEntry
+            style={styles.textInput}
+          /> 
       </View>
 
       <Gap height={20} />
@@ -119,7 +120,6 @@ const styles = StyleSheet.create({
   },
   login: {
     backgroundColor: '#C1A35F',
-    marginLeft: 'auto',
-    marginRight: 'auto',
   }
+  
 });
