@@ -9,9 +9,12 @@ import MiddlePoint from './MiddlePoint.svg';
 import Illust from './Illust.svg';
 import Sinemate from './Sinemate.svg';
 import Glass from './glass.svg';
+import Send from './send.svg';
 
 export {
+
   Logo,
+  Send,
   ProfileIcon,
   LiveIcon,
   Logos,
