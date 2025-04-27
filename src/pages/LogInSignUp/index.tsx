@@ -2,16 +2,16 @@ import {StyleSheet, View} from 'react-native';
 import {Button} from '../../components/atoms';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {Image} from 'react-native';
+import { Image } from 'react-native';
+
 
 const LogInSignUp = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-      <Image source={require('../../assets/Logo.png')} style={styles.Logo} />
+      <Image source={require('../../assets/Logo.png')} style={styles.Logo}/>
       <Button label="Log In" onPress={() => navigation.navigate('LogIn')} />
-      jakarta04
       <Button label="Sign Up" onPress={() => navigation.navigate('SignUp')} />
     </View>
   );
@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
   },
   Logo: {
-    width: 100,
-    height: 100,
+    width: 310,
+    height: 295,
     marginBottom: 50,
   },
 });
