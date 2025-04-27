@@ -6,7 +6,7 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-import {TextInputCreate} from '../../components/molecules';
+import {Chat} from '../../components/molecules';
 import {Gap, BackArrow} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
 
@@ -18,6 +18,7 @@ const LiveRoom = () => {
       <View style={styles.header}>
         <BackArrow title={'Code:'} />
       </View>
+      <Chat placeholder={'Say something...'} />
     </ScrollView>
   );
 };
