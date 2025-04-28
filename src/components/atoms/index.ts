@@ -5,8 +5,10 @@ import MiddlePoint from './MiddlePoint/index';
 import OrgButton from './OrgButton';
 import BackArrowSearch from './BackArrowSearch';
 import AddPhoto from './AddPhoto';
+import RoomCard from './RoomCard';
 
 export {
+  RoomCard,
   Button,
   BackArrow,
   Gap,
