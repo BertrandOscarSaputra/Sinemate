@@ -5,7 +5,14 @@ import {useNavigation} from '@react-navigation/native';
 import {TextInput} from 'react-native';
 const LogIn = () => {
   const navigation = useNavigation();
-
+  const handleLogin = () => {
+    // Here you'd normally check credentials or call an API
+    // For now we simulate success and go to main app
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'MainApp'}],
+    });
+  };
   return (
     <View style={styles.pageContainer}>
       <View style={styles.backArrowContainer}>
@@ -68,11 +75,7 @@ const LogIn = () => {
 
       <Gap height={30} />
 
-      <Button
-        label="Sign Up"
-        onPress={() => navigation.navigate('Live')}
-        style={styles.SignUp}
-      />
+      <Button label="Sign Up" onPress={handleLogin} style={styles.SignUp} />
 
       <Gap height={20} />
 
