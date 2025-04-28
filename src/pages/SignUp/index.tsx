@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
-import { Button, Gap, BackArrow } from '../../components/atoms'; 
-import { useNavigation } from '@react-navigation/native';
-import { TextInput } from 'react-native'; 
+import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
+import {Button, Gap, BackArrow} from '../../components/atoms';
+import {useNavigation} from '@react-navigation/native';
+import {TextInput} from 'react-native';
 const LogIn = () => {
   const navigation = useNavigation();
-
 
   return (
     <View style={styles.pageContainer}>
@@ -15,54 +14,71 @@ const LogIn = () => {
 
       <View style={styles.topSection}>
         <Image source={require('../../assets/Logo.png')} style={styles.logo} />
-        <Image source={require('../../assets/Signup.png')} style={styles.SignText} />
+        <Image
+          source={require('../../assets/Signup.png')}
+          style={styles.SignText}
+        />
       </View>
 
       <Gap height={30} />
 
       <View style={styles.inputContainer}>
-        <Image source={require('../../assets/Message.png')} style={styles.inputIcon} />
+        <Image
+          source={require('../../assets/Message.png')}
+          style={styles.inputIcon}
+        />
         <TextInput
           placeholder="Enter your e-mail"
           placeholderTextColor="#aaa"
           style={styles.textInput}
         />
-        
       </View>
       <Gap height={20} />
       <View style={styles.inputContainer}>
-        <Image source={require('../../assets/Profilegold.png')} style={styles.inputIcon} />
-        
+        <Image
+          source={require('../../assets/Profilegold.png')}
+          style={styles.inputIcon}
+        />
+
         <TextInput
           placeholder="Enter your username"
           placeholderTextColor="#aaa"
           secureTextEntry
           style={styles.textInput}
         />
-        
       </View>
       <Gap height={20} />
 
       <View style={styles.inputContainer}>
-        <Image source={require('../../assets/Lock.png')} style={styles.inputIcon} />
+        <Image
+          source={require('../../assets/Lock.png')}
+          style={styles.inputIcon}
+        />
         <TextInput
           placeholder="Enter your password"
           placeholderTextColor="#aaa"
           secureTextEntry
           style={styles.textInput}
         />
-        <Image source={require('../../assets/Hide.png')} style={styles.inputIconn}/>
+        <Image
+          source={require('../../assets/Hide.png')}
+          style={styles.inputIconn}
+        />
       </View>
 
       <Gap height={30} />
 
-      <Button label="Sign Up" onPress={() => navigation.navigate('Live')} style={styles.SignUp}/>
+      <Button
+        label="Sign Up"
+        onPress={() => navigation.navigate('Live')}
+        style={styles.SignUp}
+      />
 
       <Gap height={20} />
 
       <View style={styles.bottomText}>
         <Text style={styles.accountText}>Already have an account?</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('LogIn')}>
+        <TouchableOpacity onPress={() => navigation.replace('LogIn')}>
           <Text style={styles.signUpText}> Log In</Text>
         </TouchableOpacity>
       </View>

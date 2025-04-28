@@ -66,7 +66,7 @@ const LogIn = () => {
 
       <View style={styles.bottomText}>
         <Text style={styles.accountText}>Don't have an account?</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+        <TouchableOpacity onPress={() => navigation.replace('SignUp')}>
           <Text style={styles.signUpText}> Sign up</Text>
         </TouchableOpacity>
       </View>
