@@ -8,10 +8,9 @@ import {
 import React, {useState} from 'react';
 import {Send} from '../../../assets';
 
-const Chat = ({label, placeholder, onSendMessage}) => {
+const Chat = ({placeholder, onSendMessage}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
       <View style={styles.inputContainer}>
         <Input
           placeholder={placeholder}

@@ -13,13 +13,20 @@ import {useNavigation} from '@react-navigation/native';
 const LiveRoom = () => {
   const navigation = useNavigation();
   return (
-    <ScrollView style={styles.container}>
-      {/* Back Arrow at top */}
-      <View style={styles.header}>
-        <BackArrow title={'Code:'} />
+    <View style={styles.container}>
+      {/* Header and scrollable chat messages */}
+      <ScrollView contentContainerStyle={styles.scrollContent}>
+        <View style={styles.header}>
+          <BackArrow title={'Code:'} />
+        </View>
+        {/* here you can render messages later */}
+      </ScrollView>
+
+      {/* Fixed Chat input */}
+      <View style={styles.inputContainer}>
+        <Chat placeholder={'Say something...'} />
       </View>
-      <Chat placeholder={'Say something...'} />
-    </ScrollView>
+    </View>
   );
 };
 
@@ -30,13 +37,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000000',
   },
-  header: {
+  scrollContent: {
+    paddingHorizontal: 20,
     paddingTop: 40, // Status bar height + some margin
-    paddingHorizontal: 20,
+    paddingBottom: 80, // Add bottom padding so last message isn't hidden behind input
   },
-  content: {
-    flex: 1,
-    justifyContent: 'center', // Center vertically
-    paddingHorizontal: 20,
+  header: {
+    marginBottom: 20,
+  },
+  inputContainer: {
+    padding: 10,
+    backgroundColor: '#000000', // match background
+    borderTopWidth: 1,
+    borderTopColor: '#333333',
   },
 });
