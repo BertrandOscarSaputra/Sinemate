@@ -11,11 +11,11 @@ import Glass from './glass.svg';
 import Send from './send.svg';
 
 export {
+  Arrow,
   Send,
   ProfileIcon,
   LiveIcon,
   Logos,
-  Arrow,
   MiddlePoint,
   LiveIconIn,
   ProfileIconIn,

@@ -20,13 +20,15 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
+    padding: 20,
     backgroundColor: '#000000',
   },
-  icon: {
-    width: 24,
-    height: 24,
-    resizeMode: 'contain',
+  title: {
+    color: '#fff',
+    marginLeft: 60,
+    paddingTop: 10,
+    fontFamily: 'Poppins-Bold',
+    fontSize: 24,
   },
 });
 
