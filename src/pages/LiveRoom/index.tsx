@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
   },
   scrollContent: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 0,
     paddingTop: 40, // Status bar height + some margin
     paddingBottom: 80, // Add bottom padding so last message isn't hidden behind input
   },
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     borderTopColor: '#333333',
   },
   videoContainer: {
-    height: 220, // Adjust video height
+    height: 280, // Adjust video height
     width: '100%',
     marginBottom: 20,
     overflow: 'hidden',
