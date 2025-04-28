@@ -87,9 +87,10 @@ const AddPhoto = () => {
       {imageUri ? (
         <Image source={{uri: imageUri}} style={styles.image} />
       ) : (
-        <View style={styles.placeholder}>
-          <Text style={styles.placeholderText}>Add Photo</Text>
-        </View>
+        <Image
+          source={require('../../../assets/null-photo.png')} // <-- your placeholder image
+          style={styles.image}
+        />
       )}
     </TouchableOpacity>
   );
