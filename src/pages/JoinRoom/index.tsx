@@ -3,7 +3,6 @@ import React from 'react';
 import {TextInputCreate} from '../../components/molecules';
 import {Gap, BackArrow, OrgButton} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
-import LiveRoom from '../LiveRoom';
 
 const JoinRoom = () => {
   const navigation = useNavigation();
@@ -12,6 +11,7 @@ const JoinRoom = () => {
         index: 0,
         routes: [{name: 'LiveRoom'}],
       });
+    }
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
