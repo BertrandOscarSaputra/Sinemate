@@ -7,4 +7,6 @@ import ButtonL from './ButtonL';
 import ButtonS from './ButtonS/index';
 import BottomTabs from './BottomTabs/index';
 import AddPhoto from './AddPhoto';
-export {Button, BackArrow, Gap, MiddlePoint, OrgButton, ButtonL, ButtonS, BottomTabs, AddPhoto};
+import BackArrowSearch from './BackArrowSearch';  
+import AccountProfile from './AccountProfile';  
+export {Button, BackArrow, Gap, MiddlePoint, OrgButton, ButtonL, ButtonS, BottomTabs, AddPhoto, BackArrowSearch, AccountProfile};

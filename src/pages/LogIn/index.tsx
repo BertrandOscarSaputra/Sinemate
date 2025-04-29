@@ -7,8 +7,6 @@ const LogIn = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    // Here you'd normally check credentials or call an API
-    // For now we simulate success and go to main app
     navigation.reset({
       index: 0,
       routes: [{name: 'MainApp'}],
@@ -60,7 +58,7 @@ const LogIn = () => {
 
       <Gap height={30} />
 
-      <Button label="Log In" onPress={() => navigation.navigate('MainApp')} style={styles.login}/>
+      <Button label="Log In" onPress={handleLogin} style={styles.login}/>
 
       <Gap height={20} />
 

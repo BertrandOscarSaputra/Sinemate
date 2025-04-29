@@ -1,8 +1,6 @@
 import {
   StyleSheet,
-  Text,
   View,
-  TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import React from 'react';
@@ -17,8 +15,6 @@ const SearchPage = () => {
       <View>
         <BackArrowSearch />
       </View>
-
-      {/* Centered Inputs */}
       <View style={styles.content}></View>
     </ScrollView>
   );
@@ -32,12 +28,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
   },
   header: {
-    paddingTop: 40, // Status bar height + some margin
+    paddingTop: 40, 
     paddingHorizontal: 20,
   },
   content: {
     flex: 1,
-    justifyContent: 'center', // Center vertically
+    justifyContent: 'center',
     paddingHorizontal: 20,
   },
 });

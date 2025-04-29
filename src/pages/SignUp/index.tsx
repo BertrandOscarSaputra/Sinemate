@@ -14,7 +14,7 @@ const LogIn = () => {
   return (
     <View style={styles.pageContainer}>
       <View style={styles.backArrowContainer}>
-        <BackArrow />
+        <BackArrow title={'SignUp'} />
       </View>
 
       <View style={styles.topSection}>

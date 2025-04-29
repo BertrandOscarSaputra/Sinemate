@@ -4,8 +4,16 @@ import {AddPhoto } from '../../components/atoms';
 import {TextInput} from 'react-native';
 import {Gap} from '../../components/atoms';
 import {OrgButton} from '../../components/atoms';
-import LogInSignUp from '../LogInSignUp';
+import {useNavigation} from '@react-navigation/native';
 const Profile = () => {
+  const navigation = useNavigation();
+  
+    const LogInSignUp = () => {
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'LogInSignUp'}],
+      });
+    }
   return (
     <View>
       <AddPhoto/>
@@ -39,12 +47,12 @@ const Profile = () => {
     <View style={styles.divider} />
     <Gap height={15} />
     <OrgButton
-        label="Save" onPress={LogInSignUp}/>
+        label="Save"onPress={() => navigation.replace('LogInSignUp')}/>
     <Gap height={15} />
     <View style={styles.divider} />
     <Gap height={15} />
     <OrgButton
-        label="Log Out" onPress={LogInSignUp}/>
+        label="Log Out" onPress={() => navigation.replace('LogInSignUp')}/>
     </View>
   );
 };

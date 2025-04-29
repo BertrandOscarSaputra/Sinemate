@@ -3,18 +3,21 @@ import React from 'react';
 import {TextInputCreate} from '../../components/molecules';
 import {Gap, BackArrow, OrgButton} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
+import LiveRoom from '../LiveRoom';
 
 const JoinRoom = () => {
   const navigation = useNavigation();
+    const LiveRoom = () => {
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'LiveRoom'}],
+      });
   return (
     <ScrollView style={styles.container}>
-      {/* Back Arrow at top */}
       <View style={styles.header}>
         <BackArrow title={'Join Room'} />
       </View>
       <Gap height={20} />
-
-      {/* Centered Inputs */}
       <View style={styles.content}>
         <Image
           source={require('../../assets/Illust.png')}
@@ -25,7 +28,7 @@ const JoinRoom = () => {
           placeholder={'Enter room code...'}
         />
         <Gap height={30} />
-        <OrgButton label={'Join'} />
+        <OrgButton label={'Join'} onPress={LiveRoom} />
       </View>
     </ScrollView>
   );
