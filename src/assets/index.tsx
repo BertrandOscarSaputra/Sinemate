@@ -1,5 +1,5 @@
-import Logo from './Logo.svg';
-import ProfileIcon from './Profile.svg';
+
+
 import ProfileIconIn from './ProfileIconIn.svg';
 import LiveIcon from './LiveIcon.svg';
 import LiveIconIn from './LiveIconIn.svg';
@@ -10,12 +10,10 @@ import Illust from './Illust.svg';
 import Sinemate from './Sinemate.svg';
 import Glass from './glass.svg';
 import Send from './send.svg';
-
+import Youtub from './Youtub.svg';
+import Pintu from './Pintu.svg';
 export {
-
-  Logo,
   Send,
-  ProfileIcon,
   LiveIcon,
   Logos,
   Arrow,
@@ -25,4 +23,6 @@ export {
   Illust,
   Sinemate,
   Glass,
+  Youtub,
+  Pintu,
 };

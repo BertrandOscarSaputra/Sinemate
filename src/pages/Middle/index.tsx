@@ -1,21 +1,21 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import React from 'react';
-import {Button, Gap} from '../../components/atoms';
+import {ButtonS, Gap} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
+import {ButtonL } from '../../components/atoms';
 
 const Middle = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Button
-        label="Create Room"
-        onPress={() => navigation.navigate('CreateRoom')}
-      />
-      <Gap height={20} />
-      <Button
-        label="Join Room"
-        onPress={() => navigation.navigate('JoinRoom')}
-      />
+      <ButtonL onPress={() => navigation.navigate('CreateRoom')}>
+      </ButtonL>
+      <Text style={styles.tex}>Watch Youtube</Text>
+      
+      <Gap height={40} />
+      <ButtonS onPress={() => navigation.navigate('JoinRoom')}>
+      </ButtonS>
+      <Text style={styles.tex}>join Room</Text>
     </View>
   );
 };
@@ -29,4 +29,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#000000',
   },
+
+  tex:{
+    color: '#ffffff',
+    fontFamily: 'Poppins',
+    fontSize: 20,
+    fontWeight: 'bold',
+
+  }
 });

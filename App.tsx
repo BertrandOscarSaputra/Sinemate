@@ -8,6 +8,8 @@ import JoinRoom from './src/pages/JoinRoom';
 import LiveRoom from './src/pages/LiveRoom';
 import SearchPage from './src/pages/SearchPage';
 import Live from './src/pages/Live'; // Import the missing Live component
+import Middle from './src/pages/Middle'; // Import the missing Middle component
+import Profile from './src/pages/Profile'; // Import the missing Profile component
 
 import BottomTabs from './src/components/atoms/BottomTabs';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
@@ -59,6 +61,11 @@ const App = () => {
           component={BottomTabs}
           options={{headerShown: false}}
         />
+        <Stack.Screen 
+          name="Middle" 
+          component={Middle}
+          options={{headerShown: false}}
+         />
         <Stack.Screen
           name="CreateRoom"
           component={CreateRoom}

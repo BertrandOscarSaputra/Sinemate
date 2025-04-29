@@ -44,7 +44,7 @@ const LogIn = () => {
 
       <Gap height={30} />
 
-      <Button label="Log In" onPress={() => navigation.navigate('Live')} style={styles.login}/>
+      <Button label="Log In" onPress={() => navigation.navigate('Middle')} style={styles.login}/>
 
       <Gap height={20} />
 
