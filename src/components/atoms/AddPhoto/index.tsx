@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import {
-  View,
-  Text,
   Image,
   TouchableOpacity,
   StyleSheet,
@@ -109,6 +107,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 24,
+    marginTop: 150,
+    marginBottom: 50,
   },
   placeholder: {
     width: '100%',

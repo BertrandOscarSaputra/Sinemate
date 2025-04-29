@@ -1,8 +1,8 @@
 import React from 'react';
-import {Image, View, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Live from '../../../pages/Live'; // Your Live screen
-import Profile from '../../../pages/Profile'; // Your Profile screen
+import Live from '../../../pages/Live'; 
+import Profile from '../../../pages/Profile'; 
 import Middle from '../../../pages/Middle';
 import {
   MiddlePoint,
@@ -18,17 +18,16 @@ const BottomTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
-        headerShown: false, // Hide header for tab screens
+        headerShown: false, 
         tabBarStyle: {
-          backgroundColor: '#353535', // Tab bar background color
-          height: 60,
+          backgroundColor: '#353535', 
         },
         tabBarLabelStyle: {
-          fontSize: 14, // Font size for the labels
-          fontWeight: 'bold', // Make label text bold
+          fontSize: 14, 
+          fontWeight: 'bold', 
         },
-        tabBarActiveTintColor: '#B49C5D', // Color when tab is active
-        tabBarInactiveTintColor: 'white', // Color when tab is inactive
+        tabBarActiveTintColor: '#B49C5D', 
+        tabBarInactiveTintColor: 'white', 
       })}>
       <Tab.Screen
         name="Live"
@@ -51,7 +50,7 @@ const BottomTabs = () => {
         name="Middle"
         component={Middle}
         options={{
-          tabBarLabel: '', // Hide label to make room for the button
+          tabBarLabel: '', 
           tabBarIcon: ({focused}) => (
             <View style={[styles.circleButton, focused && styles.activeCircle]}>
               <MiddlePoint style={styles.icon} />
@@ -87,10 +86,10 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 35,
-    backgroundColor: '#B49C5D', // You can use any color or even gradient
+    backgroundColor: '#B49C5D', 
     justifyContent: 'center',
     alignItems: 'center',
-    top: -20, // Push it upward to make it look like it floats
+    top: -20, 
     elevation: 5,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 4},

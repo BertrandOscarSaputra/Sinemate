@@ -60,10 +60,15 @@ const App = () => {
           name="MainApp"
           component={BottomTabs}
           options={{headerShown: false}}
-        />
+         />
         <Stack.Screen 
           name="Middle" 
           component={Middle}
+          options={{headerShown: false}}
+         />
+         <Stack.Screen 
+          name="Profile" 
+          component={Profile}
           options={{headerShown: false}}
          />
         <Stack.Screen

@@ -1,8 +1,9 @@
 import {StyleSheet, View, Text} from 'react-native';
 import React from 'react';
-import {ButtonS, Gap} from '../../components/atoms';
+import {BottomTabs, ButtonS, Gap} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
 import {ButtonL } from '../../components/atoms';
+
 
 const Middle = () => {
   const navigation = useNavigation();

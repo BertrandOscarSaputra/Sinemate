@@ -1,39 +1,85 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 import React from 'react';
-<<<<<<< HEAD
-import {AddPhoto} from '../../components/molecules/index';
-import {OrgButton, Gap} from '../../components/atoms/index';
-
-const Profile = () => {
-  return (
-    <View style={styles.pageContainer}>
-      <View style={styles.contentContainer}>
-        <AddPhoto />
-        <Gap height={16} />
-        <OrgButton label="Continue" />
-      </View>
-=======
-import {AddPhoto} from '../../components/atoms';
-
+import {AddPhoto } from '../../components/atoms';
+import {TextInput} from 'react-native';
+import {Gap} from '../../components/atoms';
+import {OrgButton} from '../../components/atoms';
+import LogInSignUp from '../LogInSignUp';
 const Profile = () => {
   return (
     <View>
-      <AddPhoto />
->>>>>>> 08ab87c588b50dd0cff8f7818926f0fbe441039d
+      <AddPhoto/>
+
+      <View style={styles.inputContainer}>
+        <Image
+          source={require('../../assets/Profile2.png')}
+          style={styles.inputIcon}
+        />
+        <TextInput
+          placeholder="Username"
+          placeholderTextColor="#aaa"
+          secureTextEntry
+          style={styles.textInput}
+          />
+      </View>
+      <Gap height={20} />
+      <View style={styles.inputContainer}>
+        <Image
+          source={require('../../assets/At.png')}
+          style={styles.inputIcon}
+        />
+        <TextInput
+          placeholder="Email@gmail.com"
+          placeholderTextColor="#aaa"
+          secureTextEntry
+          style={styles.textInput}
+        />
+      </View>
+    <Gap height={20} />
+    <View style={styles.divider} />
+    <Gap height={15} />
+    <OrgButton
+        label="Save" onPress={LogInSignUp}/>
+    <Gap height={15} />
+    <View style={styles.divider} />
+    <Gap height={15} />
+    <OrgButton
+        label="Log Out" onPress={LogInSignUp}/>
     </View>
   );
 };
 
+
+
 export default Profile;
 
 const styles = StyleSheet.create({
-  pageContainer: {
-    flex: 1,
+
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#1a1a1a',
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    width: '90%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
-  contentContainer: {
-    backgroundColor: 'black',
-    marginTop: 24,
+  inputIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+  },
+  textInput: {
     flex: 1,
-    paddingHorizontal: 24,
+    color: '#fff'
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#fff',
+    marginVertical: 10,
+    width: '89%',
+    alignSelf: 'center',
   },
 });

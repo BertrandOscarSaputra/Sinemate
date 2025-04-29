@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
-import {Search, TextInputCreate} from '../../components/molecules';
+import {Search} from '../../components/molecules';
 import {Gap} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
 

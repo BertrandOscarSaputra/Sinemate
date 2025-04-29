@@ -19,14 +19,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: color,
     paddingVertical: 6,
-    marginBottom: 38,
     borderRadius: 30,
+    width: '75%',
+    margin: 'auto',
   }),
   label: textColor => ({
     textAlign: 'center',
     fontFamily: 'Poppins-SemiBold',
     fontSize: 20,
     fontWeight: '600',
-    color: textColor,
+    color: '#fff',
   }),
 });

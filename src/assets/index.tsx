@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-
-
-=======
 import Logo from './Lowgos.svg';
 import ProfileIcon from './profile.svg';
->>>>>>> 08ab87c588b50dd0cff8f7818926f0fbe441039d
 import ProfileIconIn from './ProfileIconIn.svg';
 import LiveIcon from './LiveIcon.svg';
 import LiveIconIn from './LiveIconIn.svg';
@@ -15,13 +10,10 @@ import Illust from './Illust.svg';
 import Sinemate from './Sinemate.svg';
 import Glass from './glass.svg';
 import Send from './send.svg';
-import Youtub from './Youtub.svg';
-import Pintu from './Pintu.svg';
+
+
 export {
-<<<<<<< HEAD
-=======
   Arrow,
->>>>>>> 08ab87c588b50dd0cff8f7818926f0fbe441039d
   Send,
   LiveIcon,
   Logos,
@@ -31,10 +23,7 @@ export {
   Illust,
   Sinemate,
   Glass,
-<<<<<<< HEAD
-  Youtub,
-  Pintu,
-=======
+  ProfileIcon,
   Logo,
->>>>>>> 08ab87c588b50dd0cff8f7818926f0fbe441039d
+  
 };
