@@ -6,7 +6,7 @@ import {
   TextInput as Input,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {Arrow} from '../../assets/';
+import {Arrow} from '../../../assets';
 
 const BackArrowSearch = () => {
   const navigation = useNavigation();

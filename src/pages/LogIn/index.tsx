@@ -1,39 +1,55 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
-import { Button, Gap, BackArrow } from '../../components/atoms'; 
-import { useNavigation } from '@react-navigation/native';
-import { TextInput } from 'react-native'; 
+import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
+import {Button, Gap, BackArrow} from '../../components/atoms';
+import {useNavigation} from '@react-navigation/native';
+import {TextInput} from 'react-native';
 const LogIn = () => {
   const navigation = useNavigation();
 
+  const handleLogin = () => {
+    // Here you'd normally check credentials or call an API
+    // For now we simulate success and go to main app
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'MainApp'}],
+    });
+  };
   return (
     <View style={styles.pageContainer}>
       <View style={styles.backArrowContainer}>
-        <BackArrow />
+        <BackArrow title={'Log in'} />
       </View>
 
       <View style={styles.topSection}>
-        
         <Image source={require('../../assets/Logo.png')} style={styles.logo} />
-        <Image source={require('../../assets/Login.png')} style={styles.loginText} />
+        <Image
+          source={require('../../assets/Login.png')}
+          style={styles.loginText}
+        />
       </View>
 
       <Gap height={30} />
 
       <View style={styles.inputContainer}>
-        <Image source={require('../../assets/Profilegold.png')} style={styles.inputIcon} />
-          <TextInput
-            placeholder="Enter your username"
-            placeholderTextColor="#aaa"
-            secureTextEntry
-            style={styles.textInput}
-          /> 
+        <Image
+          source={require('../../assets/Profilegold.png')}
+          style={styles.inputIcon}
+        />
+        <TextInput
+          placeholder="Enter your username"
+          placeholderTextColor="#aaa"
+          secureTextEntry
+          style={styles.textInput}
+        />
       </View>
 
       <Gap height={20} />
 
       <View style={styles.inputContainer}>
-        <Image source={require('../../assets/Lock.png')} style={styles.inputIcon} />
+        <Image
+          source={require('../../assets/Lock.png')}
+          style={styles.inputIcon}
+        />
         <TextInput
           placeholder="Enter your password"
           placeholderTextColor="#aaa"
@@ -44,13 +60,17 @@ const LogIn = () => {
 
       <Gap height={30} />
 
+<<<<<<< HEAD
       <Button label="Log In" onPress={() => navigation.navigate('Middle')} style={styles.login}/>
+=======
+      <Button label="Log In" onPress={handleLogin} />
+>>>>>>> 08ab87c588b50dd0cff8f7818926f0fbe441039d
 
       <Gap height={20} />
 
       <View style={styles.bottomText}>
         <Text style={styles.accountText}>Don't have an account?</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+        <TouchableOpacity onPress={() => navigation.replace('SignUp')}>
           <Text style={styles.signUpText}> Sign up</Text>
         </TouchableOpacity>
       </View>
@@ -120,6 +140,5 @@ const styles = StyleSheet.create({
   },
   login: {
     backgroundColor: '#C1A35F',
-  }
-  
+  },
 });
