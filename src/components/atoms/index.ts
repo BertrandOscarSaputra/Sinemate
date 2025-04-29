@@ -6,8 +6,10 @@ import OrgButton from './OrgButton';
 import BackArrowSearch from './BackArrowSearch';
 import AddPhoto from './AddPhoto';
 import RoomCard from './RoomCard';
+import AccountProfile from './AccountProfile';
 
 export {
+  AccountProfile,
   RoomCard,
   Button,
   BackArrow,
