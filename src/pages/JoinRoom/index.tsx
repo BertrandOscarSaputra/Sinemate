@@ -6,12 +6,6 @@ import {useNavigation} from '@react-navigation/native';
 
 const JoinRoom = () => {
   const navigation = useNavigation();
-    const LiveRoom = () => {
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'LiveRoom'}],
-      });
-    }
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
@@ -28,7 +22,10 @@ const JoinRoom = () => {
           placeholder={'Enter room code...'}
         />
         <Gap height={30} />
-        <OrgButton label={'Join'} onPress={LiveRoom} />
+        <OrgButton
+          label={'Join'}
+          onPress={() => navigation.navigate('LiveRoom')}
+        />
       </View>
     </ScrollView>
   );
@@ -45,12 +42,12 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   header: {
-    paddingTop: 40, 
+    paddingTop: 40,
     paddingHorizontal: 20,
   },
   content: {
     flex: 1,
-    justifyContent: 'center', 
+    justifyContent: 'center',
     paddingHorizontal: 20,
   },
 });
