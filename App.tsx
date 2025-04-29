@@ -7,9 +7,9 @@ import CreateRoom from './src/pages/CreateRoom';
 import JoinRoom from './src/pages/JoinRoom';
 import LiveRoom from './src/pages/LiveRoom';
 import SearchPage from './src/pages/SearchPage';
-import Live from './src/pages/Live'; // Import the missing Live component
-import Middle from './src/pages/Middle'; // Import the missing Middle component
-import Profile from './src/pages/Profile'; // Import the missing Profile component
+import Live from './src/pages/Live'; 
+import Middle from './src/pages/Middle';
+import Profile from './src/pages/Profile'; 
 
 import BottomTabs from './src/components/atoms/BottomTabs';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
@@ -17,18 +17,17 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-// 👇 Create a custom theme with black background
+
 const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: '#000000', // Set background to black
+    background: '#000000', 
   },
 };
 
 const App = () => {
   return (
-    // 👇 Apply the custom theme here
     <NavigationContainer theme={MyTheme}>
       <Stack.Navigator initialRouteName="SplashScreen">
         <Stack.Screen

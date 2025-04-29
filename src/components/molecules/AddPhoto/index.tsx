@@ -41,7 +41,7 @@ const AddPhoto = () => {
           return granted === PermissionsAndroid.RESULTS.GRANTED;
         }
       } else {
-        return true; // iOS doesn't need this for gallery
+        return true; 
       }
     } catch (err) {
       console.warn(err);

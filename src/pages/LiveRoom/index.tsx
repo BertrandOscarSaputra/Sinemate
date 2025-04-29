@@ -57,12 +57,12 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     padding: 10,
-    backgroundColor: '#000000', // match background
+    backgroundColor: '#000000', 
     borderTopWidth: 1,
     borderTopColor: '#333333',
   },
   videoContainer: {
-    height: 280, // Adjust video height
+    height: 280, 
     width: '100%',
     marginBottom: 20,
     overflow: 'hidden',

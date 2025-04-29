@@ -14,13 +14,11 @@ const CreateRoom = () => {
   const navigation = useNavigation();
   return (
     <ScrollView style={styles.container}>
-      {/* Back Arrow at top */}
       <View style={styles.header}>
         <BackArrow title={'Create Room'} />
       </View>
       <Gap height={20} />
 
-      {/* Centered Inputs */}
       <View style={styles.content}>
         <TextInputCreate
           label={'Room Code'}
@@ -54,12 +52,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
   },
   header: {
-    paddingTop: 40, // Status bar height + some margin
+    paddingTop: 40, 
     paddingHorizontal: 20,
   },
   content: {
     flex: 1,
-    justifyContent: 'center', // Center vertically
+    justifyContent: 'center',
     paddingHorizontal: 20,
   },
 });

@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   header: {
-    paddingTop: 40, // Status bar height + some margin
+    paddingTop: 40, 
     paddingHorizontal: 20,
   },
   content: {
     flex: 1,
-    justifyContent: 'center', // Center vertically
+    justifyContent: 'center', 
     paddingHorizontal: 20,
   },
 });

@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     paddingLeft: 14,
     paddingBottom: 10,
     marginBottom: 6,
-    color: '#FFFFFF', // optional, to make sure label text is not transparent
+    color: '#FFFFFF', 
   },
   input: {
     borderWidth: 1,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 16,
 
-    backgroundColor: '#1F1F1F', // <-- this makes the input not transparent
-    color: '#FFFFFF', // <-- text color inside the input
+    backgroundColor: '#1F1F1F', 
+    color: '#FFFFFF',
   },
 });

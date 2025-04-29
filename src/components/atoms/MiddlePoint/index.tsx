@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 1, // Adjust to float above tab bar
+    bottom: 1, 
     alignSelf: 'center',
     zIndex: 999,
     elevation: 10,

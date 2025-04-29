@@ -5,7 +5,7 @@ const AccountProfile = ({imageSize = 48, fontSize = 18}) => {
   return (
     <View style={[styles.container, {padding: imageSize * 0.2}]}>
       <Image
-        source={require('../../../assets/null-photo.png')} // Replace with correct path
+        source={require('../../../assets/null-photo.png')} 
         style={{
           width: imageSize,
           height: imageSize,
