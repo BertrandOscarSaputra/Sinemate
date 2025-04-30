@@ -1,7 +1,11 @@
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
 import {Chat} from '../../components/molecules';
-import {BackArrow, AccountProfile} from '../../components/atoms';
+import {
+  BackArrowLive,
+  AccountProfile,
+  ChatBubble,
+} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
 import {WebView} from 'react-native-webview';
 
@@ -9,9 +13,8 @@ const LiveRoom = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
-
       <View style={styles.header}>
-        <BackArrow title={'Code:'} />
+        <BackArrowLive title={'Code: 1234'} />
       </View>
 
       <View style={styles.videoContainer}>
@@ -26,11 +29,17 @@ const LiveRoom = () => {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <AccountProfile imageSize={36} fontSize={18} />
+        <ChatBubble
+          message={'Hello, welcome to the live room!'}
+          backgroundColor={'#000000'}
+          bubbleColor={'#3c3c3c'}
+          imageSize={40}
+          fontSize={20}
+        />
       </ScrollView>
 
       <View style={styles.inputContainer}>
-        <Chat placeholder={'Say something...'}  />
+        <Chat placeholder={'Say something...'} />
       </View>
     </View>
   );
@@ -49,20 +58,20 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: 20,
-    paddingTop: 20, 
-    paddingBottom: 80, 
+    paddingTop: 20,
+    paddingBottom: 80,
   },
   header: {
     marginBottom: 20,
   },
   inputContainer: {
     padding: 10,
-    backgroundColor: '#000000', 
+    backgroundColor: '#000000',
     borderTopWidth: 1,
     borderTopColor: '#333333',
   },
   videoContainer: {
-    height: 280, 
+    height: 280,
     width: '100%',
     marginBottom: 20,
     overflow: 'hidden',

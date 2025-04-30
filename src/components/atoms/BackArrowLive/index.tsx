@@ -4,7 +4,7 @@ import {useNavigation} from '@react-navigation/native';
 import {Arrow} from '../../../assets';
 import AccountProfile from '../AccountProfile';
 
-const CustomHeader = ({title}) => {
+const BackArrowLive = ({title}) => {
   const navigation = useNavigation();
 
   return (
@@ -13,6 +13,7 @@ const CustomHeader = ({title}) => {
         <Arrow />
       </TouchableOpacity>
       <Text style={styles.title}>{title}</Text>
+      <AccountProfile imageSize={30} fontSize={17} />
     </View>
   );
 };
@@ -26,11 +27,12 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
-    marginLeft: 60,
-    paddingTop: 10,
+    marginLeft: 35,
+    marginRight: 30,
+    marginTop: 15,
     fontFamily: 'Poppins-Bold',
     fontSize: 24,
   },
 });
 
-export default CustomHeader;
+export default BackArrowLive;
