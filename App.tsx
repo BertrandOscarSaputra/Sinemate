@@ -7,22 +7,21 @@ import CreateRoom from './src/pages/CreateRoom';
 import JoinRoom from './src/pages/JoinRoom';
 import LiveRoom from './src/pages/LiveRoom';
 import SearchPage from './src/pages/SearchPage';
-import Live from './src/pages/Live'; 
+import Live from './src/pages/Live';
 import Middle from './src/pages/Middle';
-import Profile from './src/pages/Profile'; 
-
+import Profile from './src/pages/Profile';
+import FlashMessage from 'react-native-flash-message';
 import BottomTabs from './src/components/atoms/BottomTabs';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-
 const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: '#000000', 
+    background: '#000000',
   },
 };
 
@@ -50,26 +49,26 @@ const App = () => {
           component={SignUp}
           options={{headerShown: false}}
         />
-        <Stack.Screen 
-          name="Live" 
+        <Stack.Screen
+          name="Live"
           component={Live}
           options={{headerShown: false}}
-         />
+        />
         <Stack.Screen
           name="MainApp"
           component={BottomTabs}
           options={{headerShown: false}}
-         />
-        <Stack.Screen 
-          name="Middle" 
+        />
+        <Stack.Screen
+          name="Middle"
           component={Middle}
           options={{headerShown: false}}
-         />
-         <Stack.Screen 
-          name="Profile" 
+        />
+        <Stack.Screen
+          name="Profile"
           component={Profile}
           options={{headerShown: false}}
-         />
+        />
         <Stack.Screen
           name="CreateRoom"
           component={CreateRoom}
@@ -91,6 +90,7 @@ const App = () => {
           options={{headerShown: false}}
         />
       </Stack.Navigator>
+      <FlashMessage position="top" />
     </NavigationContainer>
   );
 };

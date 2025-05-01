@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import {Button, Gap, BackArrow} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
 import {TextInput} from 'react-native';
+import {NullPhoto} from '../../assets';
+import {showMessage} from 'react-native-flash-message';
+import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+
 const LogIn = () => {
   const navigation = useNavigation();
   const handleLogin = () => {

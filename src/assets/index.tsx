@@ -10,9 +10,10 @@ import Illust from './Illust.svg';
 import Sinemate from './Sinemate.svg';
 import Glass from './glass.svg';
 import Send from './send.svg';
-
+import NullPhoto from './null-photo.png';
 
 export {
+  NullPhoto,
   Arrow,
   Send,
   LiveIcon,
@@ -25,5 +26,4 @@ export {
   Glass,
   ProfileIcon,
   Logo,
-  
 };
