@@ -14,6 +14,7 @@ import FlashMessage from 'react-native-flash-message';
 import BottomTabs from './src/components/atoms/BottomTabs';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import './src/config/Firebase';
 
 const Stack = createNativeStackNavigator();
 

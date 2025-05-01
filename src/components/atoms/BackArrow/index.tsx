@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
-    marginLeft: 60,
+    marginLeft: 75,
     paddingTop: 10,
     fontFamily: 'Poppins-Bold',
-    fontSize: 24,
+    fontSize: 28,
   },
 });
 

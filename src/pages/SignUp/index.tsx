@@ -5,16 +5,52 @@ import {useNavigation} from '@react-navigation/native';
 import {TextInput} from 'react-native';
 import {NullPhoto} from '../../assets';
 import {showMessage} from 'react-native-flash-message';
-import {getAuth, createUserWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../../config/Firebase';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {getDatabase, ref, set} from 'firebase/database';
 
-const LogIn = () => {
+const SignUp = () => {
   const navigation = useNavigation();
-  const handleLogin = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'MainApp'}],
-    });
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onSubmit = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        const user = userCredential.user;
+        const db = getDatabase();
+
+        const data = {
+          username: username,
+          email: email,
+        };
+
+        set(ref(db, 'users/' + user.uid), data)
+          .then(() => {
+            showMessage({
+              message: 'Registration success',
+              type: 'success',
+            });
+            navigation.navigate('LogIn');
+          })
+          .catch(error => {
+            showMessage({
+              message: 'Failed to save user data',
+              description: error.message,
+              type: 'danger',
+            });
+          });
+      })
+      .catch(error => {
+        showMessage({
+          message: 'Registration failed',
+          description: error.message,
+          type: 'danger',
+        });
+      });
   };
+
   return (
     <View style={styles.pageContainer}>
       <View style={styles.backArrowContainer}>
@@ -40,6 +76,7 @@ const LogIn = () => {
           placeholder="Enter your e-mail"
           placeholderTextColor="#aaa"
           style={styles.textInput}
+          onChangeText={e => setEmail(e)}
         />
       </View>
       <Gap height={20} />
@@ -52,8 +89,8 @@ const LogIn = () => {
         <TextInput
           placeholder="Enter your username"
           placeholderTextColor="#aaa"
-          secureTextEntry
           style={styles.textInput}
+          onChangeText={e => setUsername(e)}
         />
       </View>
       <Gap height={20} />
@@ -67,6 +104,7 @@ const LogIn = () => {
           placeholder="Enter your password"
           placeholderTextColor="#aaa"
           secureTextEntry
+          onChangeText={e => setPassword(e)}
           style={styles.textInput}
         />
         <Image
@@ -77,13 +115,16 @@ const LogIn = () => {
 
       <Gap height={30} />
 
-      <Button label="Sign Up" onPress={handleLogin} style={styles.SignUp} />
+      <Button label="Sign Up" onPress={onSubmit} style={styles.SignUp} />
 
       <Gap height={20} />
 
       <View style={styles.bottomText}>
         <Text style={styles.accountText}>Already have an account?</Text>
-        <TouchableOpacity onPress={() => navigation.replace('LogIn')}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.replace('LogIn');
+          }}>
           <Text style={styles.signUpText}> Log In</Text>
         </TouchableOpacity>
       </View>
@@ -91,7 +132,7 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default SignUp;
 
 const styles = StyleSheet.create({
   pageContainer: {

@@ -1,22 +1,16 @@
 import {StyleSheet, View, Image} from 'react-native';
 import React from 'react';
-import {AddPhoto } from '../../components/atoms';
+import {AddPhoto} from '../../components/atoms';
 import {TextInput} from 'react-native';
 import {Gap} from '../../components/atoms';
 import {OrgButton} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
 const Profile = () => {
   const navigation = useNavigation();
-  
-    const LogInSignUp = () => {
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'LogInSignUp'}],
-      });
-    }
+
   return (
     <View>
-      <AddPhoto/>
+      <AddPhoto />
 
       <View style={styles.inputContainer}>
         <Image
@@ -26,9 +20,9 @@ const Profile = () => {
         <TextInput
           placeholder="Username"
           placeholderTextColor="#aaa"
-          secureTextEntry
+          editable={false}
           style={styles.textInput}
-          />
+        />
       </View>
       <Gap height={20} />
       <View style={styles.inputContainer}>
@@ -39,30 +33,31 @@ const Profile = () => {
         <TextInput
           placeholder="Email@gmail.com"
           placeholderTextColor="#aaa"
-          secureTextEntry
+          editable={false}
           style={styles.textInput}
         />
       </View>
-    <Gap height={20} />
-    <View style={styles.divider} />
-    <Gap height={15} />
-    <OrgButton
-        label="Save"onPress={() => navigation.replace('LogInSignUp')}/>
-    <Gap height={15} />
-    <View style={styles.divider} />
-    <Gap height={15} />
-    <OrgButton
-        label="Log Out" onPress={() => navigation.replace('LogInSignUp')}/>
+      <Gap height={20} />
+      <View style={styles.divider} />
+      <Gap height={15} />
+      <OrgButton
+        label="Save"
+        onPress={() => navigation.replace('LogInSignUp')}
+      />
+      <Gap height={15} />
+      <View style={styles.divider} />
+      <Gap height={15} />
+      <OrgButton
+        label="Log Out"
+        onPress={() => navigation.replace('LogInSignUp')}
+      />
     </View>
   );
 };
 
-
-
 export default Profile;
 
 const styles = StyleSheet.create({
-
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -81,7 +76,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
-    color: '#fff'
+    color: '#fff',
   },
   divider: {
     height: 1,
