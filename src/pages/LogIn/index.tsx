@@ -1,10 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import {Button, Gap, BackArrow} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
 import {TextInput} from 'react-native';
+import {auth} from '../../config/Firebase';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import {showMessage} from 'react-native-flash-message';
+
 const LogIn = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onSubmit = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        const user = userCredential.user;
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'MainApp', params: {uid: user.uid}}],
+        });
+      })
+      .catch(error => {
+        showMessage({
+          message: error.message,
+          type: 'danger',
+        });
+      });
+  };
 
   const handleLogin = () => {
     navigation.reset({
@@ -15,7 +38,7 @@ const LogIn = () => {
   return (
     <View style={styles.pageContainer}>
       <View style={styles.backArrowContainer}>
-        <BackArrow title={'Log in'} />
+        <BackArrow title={'Log In'} />
       </View>
 
       <View style={styles.topSection}>
@@ -34,10 +57,11 @@ const LogIn = () => {
           style={styles.inputIcon}
         />
         <TextInput
-          placeholder="Enter your username"
+          placeholder="Enter your email"
           placeholderTextColor="#aaa"
-          secureTextEntry
           style={styles.textInput}
+          value={email}
+          onChangeText={value => setEmail(value)}
         />
       </View>
 
@@ -51,14 +75,16 @@ const LogIn = () => {
         <TextInput
           placeholder="Enter your password"
           placeholderTextColor="#aaa"
-          secureTextEntry
           style={styles.textInput}
+          secureTextEntry={true}
+          value={password}
+          onChangeText={value => setPassword(value)}
         />
       </View>
 
       <Gap height={30} />
 
-      <Button label="Log In" onPress={handleLogin} style={styles.login}/>
+      <Button label="Log In" onPress={onSubmit} style={styles.login} />
 
       <Gap height={20} />
 

@@ -54,7 +54,7 @@ const SignUp = () => {
   return (
     <View style={styles.pageContainer}>
       <View style={styles.backArrowContainer}>
-        <BackArrow title={'SignUp'} />
+        <BackArrow title={'Sign Up'} />
       </View>
 
       <View style={styles.topSection}>
