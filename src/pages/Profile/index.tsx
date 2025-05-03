@@ -1,12 +1,41 @@
 import {StyleSheet, View, Image} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {auth} from '../../config/Firebase';
 import {AddPhoto} from '../../components/atoms';
 import {TextInput} from 'react-native';
 import {Gap} from '../../components/atoms';
 import {OrgButton} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
+import {getDatabase, ref, child, get} from 'firebase/database';
+
 const Profile = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    const db = getDatabase();
+    const user = auth.currentUser;
+    if (user) {
+      const userId = user.uid;
+
+      const userRef = ref(db, `users/${userId}`);
+
+      get(userRef)
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+            setUsername(data.username || 'No username');
+            setEmail(data.email || 'No email');
+          } else {
+            console.log('No data available');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  }, []);
 
   return (
     <View>
@@ -18,7 +47,7 @@ const Profile = () => {
           style={styles.inputIcon}
         />
         <TextInput
-          placeholder="Username"
+          placeholder={username}
           placeholderTextColor="#aaa"
           editable={false}
           style={styles.textInput}
@@ -31,7 +60,7 @@ const Profile = () => {
           style={styles.inputIcon}
         />
         <TextInput
-          placeholder="Email@gmail.com"
+          placeholder={email}
           placeholderTextColor="#aaa"
           editable={false}
           style={styles.textInput}
