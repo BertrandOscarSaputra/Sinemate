@@ -5,6 +5,7 @@ import {
   ScrollView,
   ActivityIndicator,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import React, {useEffect, useState, useCallback} from 'react';
 import {Search} from '../../components/molecules';
@@ -49,19 +50,21 @@ const Live = () => {
 
               const hostData = hostSnapshot.val();
 
-              // Extract YouTube video ID from embed URL
               const videoIdMatch = room.videoSource?.match(
                 /(?:\/embed\/|v=)([a-zA-Z0-9_-]{11})/,
               );
               const videoId = videoIdMatch?.[1] || '';
 
-              return {
+              const fullRoom = {
                 id: roomId,
                 ...room,
                 hostName: hostData.name,
                 hostPhoto: hostData.photo,
                 thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
               };
+
+              console.log('Fetched public room:', fullRoom);
+              return fullRoom;
             } catch (err) {
               console.warn(`Error fetching host for room ${roomId}`, err);
               return null;
@@ -87,7 +90,7 @@ const Live = () => {
   }, [fetchRooms]);
 
   const handleRefresh = () => {
-    fetchRooms(); // Trigger the fetchRooms function on refresh button press
+    fetchRooms();
   };
 
   if (loading) {
@@ -105,7 +108,6 @@ const Live = () => {
       </View>
       <Gap height={20} />
 
-      {/* Refresh Button */}
       <TouchableOpacity onPress={handleRefresh} style={styles.refreshButton}>
         <Text style={styles.refreshButtonText}>Refresh</Text>
       </TouchableOpacity>
@@ -117,10 +119,35 @@ const Live = () => {
             rooms.map(room => (
               <RoomCard
                 key={room.id}
-                onPress={() => {
-                  console.log('Navigating to room with code:', room.id); // Debugging log
-                  // Directly navigate using room.id
-                  navigation.navigate('LiveRoom', {roomCode: room.id});
+                onPress={async () => {
+                  console.log('Navigating to room with code:', room.id);
+                  console.log(
+                    'Full room object:',
+                    JSON.stringify(room, null, 2),
+                  );
+
+                  try {
+                    const db = getDatabase();
+                    const roomRef = ref(db, `rooms/${room.id}`);
+                    const snapshot = await get(roomRef);
+
+                    if (snapshot.exists()) {
+                      console.log(`✅ Room ${room.id} confirmed in database.`);
+                      navigation.navigate('LiveRoom', {roomCode: room.id});
+                    } else {
+                      console.warn(`❌ Room ${room.id} not found in database.`);
+                      Alert.alert(
+                        'Room Not Found',
+                        'This room may have been deleted.',
+                      );
+                    }
+                  } catch (err) {
+                    console.error(
+                      'Error checking room before navigation:',
+                      err,
+                    );
+                    Alert.alert('Error', 'Failed to check room availability.');
+                  }
                 }}
                 quote={room.name}
                 imageSource={{uri: room.thumbnail}}
