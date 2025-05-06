@@ -4,8 +4,9 @@ import {
   View,
   ScrollView,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {Search} from '../../components/molecules';
 import {Gap, RoomCard} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
@@ -23,67 +24,71 @@ const Live = () => {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchRooms = async () => {
-      setLoading(true);
-      try {
-        const db = getDatabase();
-        const roomsRef = ref(db, 'rooms');
-        const roomsQuery = query(
-          roomsRef,
-          orderByChild('isPrivate'),
-          equalTo(false),
+  const fetchRooms = useCallback(async () => {
+    setLoading(true);
+    try {
+      const db = getDatabase();
+      const roomsRef = ref(db, 'rooms');
+      const roomsQuery = query(
+        roomsRef,
+        orderByChild('isPrivate'),
+        equalTo(false),
+      );
+      const snapshot = await get(roomsQuery);
+
+      if (snapshot.exists()) {
+        const roomData = snapshot.val();
+        const fetchPromises = Object.entries(roomData).map(
+          async ([roomId, room]) => {
+            try {
+              const userIds = Object.keys(room.users || {});
+              const creatorId = userIds.length > 0 ? userIds[0] : room.host;
+              const hostSnapshot = await get(ref(db, `users/${creatorId}`));
+
+              if (!hostSnapshot.exists()) return null;
+
+              const hostData = hostSnapshot.val();
+
+              // Extract YouTube video ID from embed URL
+              const videoIdMatch = room.videoSource?.match(
+                /(?:\/embed\/|v=)([a-zA-Z0-9_-]{11})/,
+              );
+              const videoId = videoIdMatch?.[1] || '';
+
+              return {
+                id: roomId,
+                ...room,
+                hostName: hostData.name,
+                hostPhoto: hostData.photo,
+                thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+              };
+            } catch (err) {
+              console.warn(`Error fetching host for room ${roomId}`, err);
+              return null;
+            }
+          },
         );
-        const snapshot = await get(roomsQuery);
 
-        if (snapshot.exists()) {
-          const roomData = snapshot.val();
-          const fetchPromises = Object.entries(roomData).map(
-            async ([roomId, room]) => {
-              try {
-                const userIds = Object.keys(room.users || {});
-                const creatorId = userIds.length > 0 ? userIds[0] : room.host;
-                const hostSnapshot = await get(ref(db, `users/${creatorId}`));
-
-                if (!hostSnapshot.exists()) return null;
-
-                const hostData = hostSnapshot.val();
-
-                // Extract YouTube video ID from embed URL
-                const videoIdMatch = room.videoSource?.match(
-                  /(?:\/embed\/|v=)([a-zA-Z0-9_-]{11})/,
-                );
-                const videoId = videoIdMatch?.[1] || '';
-
-                return {
-                  id: roomId,
-                  ...room,
-                  hostName: hostData.name,
-                  hostPhoto: hostData.photo,
-                  thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
-                };
-              } catch (err) {
-                console.warn(`Error fetching host for room ${roomId}`, err);
-                return null;
-              }
-            },
-          );
-
-          const roomList = (await Promise.all(fetchPromises)).filter(Boolean);
-          setRooms(roomList);
-        } else {
-          setRooms([]);
-        }
-      } catch (error) {
-        console.error('Error fetching rooms:', error);
+        const roomList = (await Promise.all(fetchPromises)).filter(Boolean);
+        setRooms(roomList);
+      } else {
         setRooms([]);
-      } finally {
-        setLoading(false);
       }
-    };
-
-    fetchRooms();
+    } catch (error) {
+      console.error('Error fetching rooms:', error);
+      setRooms([]);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchRooms();
+  }, [fetchRooms]);
+
+  const handleRefresh = () => {
+    fetchRooms(); // Trigger the fetchRooms function on refresh button press
+  };
 
   if (loading) {
     return (
@@ -99,15 +104,24 @@ const Live = () => {
         <Search />
       </View>
       <Gap height={20} />
+
+      {/* Refresh Button */}
+      <TouchableOpacity onPress={handleRefresh} style={styles.refreshButton}>
+        <Text style={styles.refreshButtonText}>Refresh</Text>
+      </TouchableOpacity>
+
+      <Gap height={20} />
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.content}>
           {rooms.length > 0 ? (
             rooms.map(room => (
               <RoomCard
                 key={room.id}
-                onPress={() =>
-                  navigation.navigate('LiveRoom', {roomCode: room.id})
-                }
+                onPress={() => {
+                  console.log('Navigating to room with code:', room.id); // Debugging log
+                  // Directly navigate using room.id
+                  navigation.navigate('LiveRoom', {roomCode: room.id});
+                }}
                 quote={room.name}
                 imageSource={{uri: room.thumbnail}}
                 name={room.hostName}
@@ -149,6 +163,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
   text: {
+    color: '#fff',
+    fontSize: 16,
+  },
+  refreshButton: {
+    backgroundColor: '#007BFF',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignSelf: 'center',
+  },
+  refreshButtonText: {
     color: '#fff',
     fontSize: 16,
   },
