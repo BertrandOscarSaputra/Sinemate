@@ -10,7 +10,7 @@ import {Chat} from '../../components/molecules';
 import {BackArrowLive, ChatBubble} from '../../components/atoms';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {WebView} from 'react-native-webview';
-import {getDatabase, ref, get} from 'firebase/database';
+import {getDatabase, ref, get, set} from 'firebase/database';
 
 const LiveRoom = () => {
   const navigation = useNavigation();
@@ -19,6 +19,7 @@ const LiveRoom = () => {
 
   const [roomData, setRoomData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [messages, setMessages] = useState([]); // State to store chat messages
 
   useEffect(() => {
     const fetchRoomData = async () => {
@@ -41,6 +42,19 @@ const LiveRoom = () => {
 
     fetchRoomData();
   }, [roomCode]);
+
+  const handleSendMessage = message => {
+    // Add the new message to the messages state
+    setMessages(prevMessages => [
+      ...prevMessages,
+      {id: prevMessages.length + 1, text: message},
+    ]);
+
+    // Optionally, send the message to Firebase if needed
+    // const db = getDatabase();
+    // const messagesRef = ref(db, `rooms/${roomCode}/messages`);
+    // set(messagesRef, { messages });
+  };
 
   if (loading) {
     return (
@@ -89,17 +103,23 @@ const LiveRoom = () => {
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <ChatBubble
-          message={'Hello, welcome to the live room!'}
-          backgroundColor={'#000000'}
-          bubbleColor={'#3c3c3c'}
-          imageSize={40}
-          fontSize={20}
-        />
+        {messages.map(message => (
+          <ChatBubble
+            key={message.id}
+            message={message.text}
+            backgroundColor={'#000000'}
+            bubbleColor={'#3c3c3c'}
+            imageSize={40}
+            fontSize={20}
+          />
+        ))}
       </ScrollView>
 
       <View style={styles.inputContainer}>
-        <Chat placeholder={'Say something...'} />
+        <Chat
+          placeholder={'Say something...'}
+          onSendMessage={handleSendMessage}
+        />
       </View>
     </View>
   );
