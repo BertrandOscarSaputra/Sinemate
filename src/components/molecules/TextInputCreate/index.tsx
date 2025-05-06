@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, TextInput as Input} from 'react-native';
 import React from 'react';
 
-const TextInputCreate = ({label, placeholder}) => {
+const TextInputCreate = ({label, placeholder, value, onChangeText}) => {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
@@ -9,6 +9,8 @@ const TextInputCreate = ({label, placeholder}) => {
         placeholder={placeholder}
         style={[styles.input, {fontSize: 16}]}
         placeholderTextColor="#8e8e93"
+        value={value} // Bind the value to the input field
+        onChangeText={onChangeText} // Set the onChangeText handler
       />
     </View>
   );
@@ -23,7 +25,7 @@ const styles = StyleSheet.create({
     paddingLeft: 14,
     paddingBottom: 10,
     marginBottom: 6,
-    color: '#FFFFFF', 
+    color: '#FFFFFF',
   },
   input: {
     borderWidth: 1,
@@ -32,8 +34,7 @@ const styles = StyleSheet.create({
     borderColor: '#020202',
     borderRadius: 10,
     padding: 16,
-
-    backgroundColor: '#1F1F1F', 
+    backgroundColor: '#1F1F1F',
     color: '#FFFFFF',
   },
 });
