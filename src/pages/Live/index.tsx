@@ -25,6 +25,7 @@ const Live = () => {
 
   useEffect(() => {
     const fetchRooms = async () => {
+      setLoading(true);
       try {
         const db = getDatabase();
         const roomsRef = ref(db, 'rooms');
@@ -32,38 +33,47 @@ const Live = () => {
           roomsRef,
           orderByChild('isPrivate'),
           equalTo(false),
-        ); // Fetch only public rooms
+        );
         const snapshot = await get(roomsQuery);
 
         if (snapshot.exists()) {
-          const roomList = [];
-          // Fetch user data for each room's host
-          snapshot.forEach(async childSnapshot => {
-            const room = childSnapshot.val();
-            const hostId = room.host;
+          const roomData = snapshot.val();
+          const fetchPromises = Object.entries(roomData).map(
+            async ([roomId, room]) => {
+              try {
+                const hostSnapshot = await get(ref(db, `users/${room.host}`));
+                if (!hostSnapshot.exists()) return null;
 
-            // Fetch host data from the users node
-            const hostRef = ref(db, `users/${hostId}`);
-            const hostSnapshot = await get(hostRef);
+                const hostData = hostSnapshot.val();
 
-            if (hostSnapshot.exists()) {
-              const hostData = hostSnapshot.val();
-              roomList.push({
-                id: childSnapshot.key,
-                ...room,
-                hostName: hostData.name, // Add host's name
-                hostPhoto: hostData.photo, // Add host's photo
-              });
-            }
-          });
+                // Extract YouTube video ID from embed URL
+                const videoIdMatch = room.videoSource?.match(
+                  /(?:\/embed\/|v=)([a-zA-Z0-9_-]{11})/,
+                );
+                const videoId = videoIdMatch?.[1] || '';
 
-          // Once all the rooms and host data are fetched, set the state
+                return {
+                  id: roomId,
+                  ...room,
+                  hostName: hostData.name,
+                  hostPhoto: hostData.photo,
+                  thumbnail: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+                };
+              } catch (err) {
+                console.warn(`Error fetching host for room ${roomId}`, err);
+                return null;
+              }
+            },
+          );
+
+          const roomList = (await Promise.all(fetchPromises)).filter(Boolean);
           setRooms(roomList);
         } else {
-          console.log('No public rooms found.');
+          setRooms([]);
         }
       } catch (error) {
         console.error('Error fetching rooms:', error);
+        setRooms([]);
       } finally {
         setLoading(false);
       }
@@ -96,13 +106,9 @@ const Live = () => {
                   navigation.navigate('LiveRoom', {roomCode: room.id})
                 }
                 quote={room.name}
-                imageSource={{
-                  uri: `https://img.youtube.com/vi/${
-                    room.videoSource.split('/')[4]
-                  }/maxresdefault.jpg`, // Generate image URL from video source
-                }}
-                name={room.hostName} // Pass the host's name
-                photo={room.hostPhoto} // Pass the host's photo (base64 or URL)
+                imageSource={{uri: room.thumbnail}}
+                name={room.hostName}
+                photo={room.hostPhoto}
               />
             ))
           ) : (
@@ -126,12 +132,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   scrollViewContent: {
-    alignItems: 'center', // Centers the RoomCard components horizontally
-    paddingBottom: 20, // Adds space at the bottom of the scroll
+    alignItems: 'center',
+    paddingBottom: 20,
   },
   content: {
-    width: '100%', // Ensures RoomCard takes the full width available in the ScrollView
-    alignItems: 'center', // Centers the content within the container
+    width: '100%',
+    alignItems: 'center',
   },
   loadingContainer: {
     flex: 1,
