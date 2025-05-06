@@ -41,7 +41,10 @@ const Live = () => {
           const fetchPromises = Object.entries(roomData).map(
             async ([roomId, room]) => {
               try {
-                const hostSnapshot = await get(ref(db, `users/${room.host}`));
+                const userIds = Object.keys(room.users || {});
+                const creatorId = userIds.length > 0 ? userIds[0] : room.host;
+                const hostSnapshot = await get(ref(db, `users/${creatorId}`));
+
                 if (!hostSnapshot.exists()) return null;
 
                 const hostData = hostSnapshot.val();
