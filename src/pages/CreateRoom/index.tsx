@@ -5,6 +5,7 @@ import {Gap, BackArrow, OrgButton} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
 import {getDatabase, ref, set} from 'firebase/database';
 import {auth} from '../../config/Firebase';
+import uuid from 'react-native-uuid';
 
 const CreateRoom = () => {
   const navigation = useNavigation();
@@ -13,26 +14,32 @@ const CreateRoom = () => {
   const [videoSource, setVideoSource] = useState('');
 
   const handleCreate = async () => {
-    if (!roomCode || !roomName || !videoSource) {
-      Alert.alert('All fields are required!');
+    if (!roomName || !videoSource) {
+      Alert.alert('Room name and video source are required!');
       return;
     }
 
+    const trimmedCode = roomCode.trim();
+    const finalRoomCode =
+      trimmedCode !== '' ? trimmedCode : uuid.v4().slice(0, 6);
+    const isPrivate = trimmedCode !== '';
+
     try {
       const db = getDatabase();
-      const roomRef = ref(db, `rooms/${roomCode}`);
+      const roomRef = ref(db, `rooms/${finalRoomCode}`);
 
       await set(roomRef, {
         name: roomName,
-        videoSource,
+        videoSource: videoSource, // Directly store the embed URL
         host: auth.currentUser?.uid || 'guest',
         createdAt: Date.now(),
+        isPrivate,
         users: {
           [auth.currentUser?.uid || 'guest']: true,
         },
       });
 
-      navigation.navigate('LiveRoom', {roomCode});
+      navigation.navigate('LiveRoom', {roomCode: finalRoomCode});
     } catch (error) {
       console.error('Failed to create room:', error);
       Alert.alert('Error', 'Could not create room.');
@@ -48,8 +55,8 @@ const CreateRoom = () => {
 
       <View style={styles.content}>
         <TextInputCreate
-          label={'Room Code'}
-          placeholder={'Enter room code...'}
+          label={'Room Code (Private Only)'}
+          placeholder={'Enter room code (optional)...'}
           value={roomCode}
           onChangeText={setRoomCode}
         />
@@ -62,8 +69,8 @@ const CreateRoom = () => {
         />
         <Gap height={20} />
         <TextInputCreate
-          label={'Video Source'}
-          placeholder={'Enter YouTube link...'}
+          label={'Video Source (Embed URL)'}
+          placeholder={'Enter YouTube embed URL...'}
           value={videoSource}
           onChangeText={setVideoSource}
         />

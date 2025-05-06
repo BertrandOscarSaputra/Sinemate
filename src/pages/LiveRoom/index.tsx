@@ -58,6 +58,17 @@ const LiveRoom = () => {
     );
   }
 
+  // Function to extract the YouTube embed URL from the iframe string
+  const extractYouTubeEmbedUrl = iframe => {
+    const regex =
+      /src="(https:\/\/www\.youtube\.com\/embed\/[\w-]{11}[\?a-zA-Z0-9=&]*)"/;
+    const match = iframe.match(regex);
+    return match ? match[1] : null;
+  };
+
+  // Get the YouTube video URL from the roomData (iframe embed code)
+  const videoUrl = extractYouTubeEmbedUrl(roomData.videoSource);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -65,12 +76,16 @@ const LiveRoom = () => {
       </View>
 
       <View style={styles.videoContainer}>
-        <WebView
-          style={styles.webview}
-          source={{uri: roomData.videoSource}}
-          allowsFullscreenVideo
-          mediaPlaybackRequiresUserAction={false}
-        />
+        {videoUrl ? (
+          <WebView
+            style={styles.webview}
+            source={{uri: videoUrl}} // Use the extracted video URL
+            allowsFullscreenVideo
+            mediaPlaybackRequiresUserAction={false}
+          />
+        ) : (
+          <Text style={styles.text}>Invalid video source</Text>
+        )}
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
