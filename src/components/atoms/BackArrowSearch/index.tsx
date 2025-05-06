@@ -8,7 +8,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {Arrow} from '../../../assets';
 
-const BackArrowSearch = () => {
+const BackArrowSearch = ({searchText, onChangeText}) => {
   const navigation = useNavigation();
 
   return (
@@ -20,6 +20,8 @@ const BackArrowSearch = () => {
       </TouchableOpacity>
       <Input
         placeholder="Search..."
+        value={searchText}
+        onChangeText={onChangeText}
         style={styles.input}
         placeholderTextColor="#8e8e93"
       />
