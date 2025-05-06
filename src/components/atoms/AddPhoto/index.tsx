@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Image,
   TouchableOpacity,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 
-const AddPhoto = () => {
+const AddPhoto = ({imageBase64, setImageBase64}) => {
   const [imageUri, setImageUri] = useState(null);
 
   const requestGalleryPermission = async () => {
@@ -60,6 +60,7 @@ const AddPhoto = () => {
     launchImageLibrary(
       {
         mediaType: 'photo',
+        includeBase64: true,
         quality: 1,
         maxWidth: 512,
         maxHeight: 512,
@@ -74,22 +75,27 @@ const AddPhoto = () => {
         }
 
         if (response.assets && response.assets.length > 0) {
-          setImageUri(response.assets[0].uri);
+          const asset = response.assets[0];
+          setImageUri(asset.uri);
+          setImageBase64(asset.base64); // pass base64 to parent
         }
       },
     );
   };
 
+  const displayImageSource = () => {
+    if (imageUri) {
+      return {uri: imageUri};
+    } else if (imageBase64) {
+      return {uri: `data:image/jpeg;base64,${imageBase64}`};
+    } else {
+      return require('../../../assets/null-photo.png');
+    }
+  };
+
   return (
     <TouchableOpacity style={styles.wrapper} onPress={handlePickImage}>
-      {imageUri ? (
-        <Image source={{uri: imageUri}} style={styles.image} />
-      ) : (
-        <Image
-          source={require('../../../assets/null-photo.png')} // <-- your placeholder image
-          style={styles.image}
-        />
-      )}
+      <Image source={displayImageSource()} style={styles.image} />
     </TouchableOpacity>
   );
 };
@@ -109,17 +115,6 @@ const styles = StyleSheet.create({
     marginVertical: 24,
     marginTop: 150,
     marginBottom: 50,
-  },
-  placeholder: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#F2F2F2',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  placeholderText: {
-    color: '#BDBDBD',
-    fontSize: 14,
   },
   image: {
     width: '100%',

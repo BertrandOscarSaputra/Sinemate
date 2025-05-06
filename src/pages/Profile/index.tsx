@@ -1,24 +1,29 @@
-import {StyleSheet, View, Image} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  TextInput,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {auth} from '../../config/Firebase';
-import {AddPhoto} from '../../components/atoms';
-import {TextInput} from 'react-native';
-import {Gap} from '../../components/atoms';
-import {OrgButton} from '../../components/atoms';
+import {AddPhoto, Gap, OrgButton} from '../../components/atoms';
 import {useNavigation} from '@react-navigation/native';
-import {getDatabase, ref, child, get} from 'firebase/database';
+import {getDatabase, ref, get, set} from 'firebase/database';
 
 const Profile = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
+  const [imageBase64, setImageBase64] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const db = getDatabase();
     const user = auth.currentUser;
     if (user) {
       const userId = user.uid;
-
       const userRef = ref(db, `users/${userId}`);
 
       get(userRef)
@@ -27,6 +32,9 @@ const Profile = () => {
             const data = snapshot.val();
             setUsername(data.username || 'No username');
             setEmail(data.email || 'No email');
+            if (data.profileImage) {
+              setImageBase64(data.profileImage);
+            }
           } else {
             console.log('No data available');
           }
@@ -37,9 +45,32 @@ const Profile = () => {
     }
   }, []);
 
+  const handleSave = async () => {
+    const db = getDatabase();
+    const user = auth.currentUser;
+
+    if (user) {
+      const userRef = ref(db, `users/${user.uid}`);
+      setLoading(true);
+      try {
+        await set(userRef, {
+          username,
+          email,
+          profileImage: imageBase64 || '',
+        });
+        Alert.alert('Success', 'Profile updated successfully');
+      } catch (error) {
+        console.error('Failed to save profile:', error);
+        Alert.alert('Error', 'Failed to save profile');
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   return (
     <View>
-      <AddPhoto />
+      <AddPhoto imageBase64={imageBase64} setImageBase64={setImageBase64} />
 
       <View style={styles.inputContainer}>
         <Image
@@ -69,13 +100,17 @@ const Profile = () => {
       <Gap height={20} />
       <View style={styles.divider} />
       <Gap height={15} />
+
       <OrgButton
-        label="Save"
-        onPress={() => navigation.replace('LogInSignUp')}
+        label={loading ? <ActivityIndicator color="#fff" /> : 'Save'}
+        onPress={handleSave}
+        disabled={loading}
       />
+
       <Gap height={15} />
       <View style={styles.divider} />
       <Gap height={15} />
+
       <OrgButton
         label="Log Out"
         onPress={() => navigation.replace('LogInSignUp')}
