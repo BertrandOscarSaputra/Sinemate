@@ -13,6 +13,7 @@ const RoomCard = ({
   imageSource,
   quote = 'Smile can win',
   name = 'Rackel James',
+  roomCode,
   onPress = () => {}, // Default onPress can still be overridden
 }) => {
   const navigation = useNavigation(); // Initialize navigation
@@ -20,7 +21,7 @@ const RoomCard = ({
   // Default onPress functionality that includes navigation
   const handlePress = () => {
     onPress(); // Call any additional onPress functionality passed from parent
-    navigation.navigate('LiveRoom'); // Replace 'SomeScreen' with the name of the screen you want to navigate to
+    navigation.navigate('LiveRoom', {roomCode}); // Pass roomCode to LiveRoom
   };
 
   return (

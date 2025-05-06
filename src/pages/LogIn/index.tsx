@@ -18,23 +18,36 @@ const LogIn = () => {
         const user = userCredential.user;
         navigation.reset({
           index: 0,
-          routes: [{name: 'MainApp', params: {uid: user.uid}}],
+          routes: [
+            {
+              name: 'MainApp',
+              params: {
+                uid: user.uid,
+                displayName: user.displayName,
+                photoURL: user.photoURL,
+              },
+            },
+          ],
         });
       })
       .catch(error => {
+        let errorMessage = 'Something went wrong. Please try again.';
+
+        if (error.code === 'auth/user-not-found') {
+          errorMessage = 'No user found with this email.';
+        } else if (error.code === 'auth/wrong-password') {
+          errorMessage = 'Incorrect password.';
+        } else if (error.code === 'auth/invalid-email') {
+          errorMessage = 'Please enter a valid email address.';
+        }
+
         showMessage({
-          message: error.message,
+          message: errorMessage,
           type: 'danger',
         });
       });
   };
 
-  const handleLogin = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'MainApp'}],
-    });
-  };
   return (
     <View style={styles.pageContainer}>
       <View style={styles.backArrowContainer}>

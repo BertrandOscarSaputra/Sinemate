@@ -24,20 +24,40 @@ const CreateRoom = () => {
       trimmedCode !== '' ? trimmedCode : uuid.v4().slice(0, 6);
     const isPrivate = trimmedCode !== '';
 
+    const user = auth.currentUser;
+    if (!user) {
+      Alert.alert('Error', 'You must be logged in to create a room.');
+      return;
+    }
+
+    const userId = user.uid;
+    const userName = user.displayName; // Keep the original name if it exists
+    const userPhoto = user.photoURL; // Keep the original photo URL if it exists
+
     try {
       const db = getDatabase();
       const roomRef = ref(db, `rooms/${finalRoomCode}`);
 
+      // Set room data in the rooms node
       await set(roomRef, {
         name: roomName,
         videoSource: videoSource, // Directly store the embed URL
-        host: auth.currentUser?.uid || 'guest',
+        host: userId,
         createdAt: Date.now(),
         isPrivate,
         users: {
-          [auth.currentUser?.uid || 'guest']: true,
+          [userId]: true,
         },
       });
+
+      // Only store user info if name and photoURL exist
+      if (userName || userPhoto) {
+        const userRef = ref(db, `users/${userId}`);
+        await set(userRef, {
+          name: userName,
+          photo: userPhoto, // Only store if available
+        });
+      }
 
       navigation.navigate('LiveRoom', {roomCode: finalRoomCode});
     } catch (error) {

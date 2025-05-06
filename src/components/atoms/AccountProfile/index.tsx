@@ -5,8 +5,13 @@ const AccountProfile = ({
   imageSize = 48,
   fontSize = 18,
   backgroundColor = '#1c1c1c',
-  name = 'Rackel James', // Default fallback
+  name = 'Rackel James',
+  photo = null,
 }) => {
+  const imageSource = photo
+    ? {uri: `data:image/jpeg;base64,${photo}`} // Handle base64 if provided
+    : require('../../../assets/null-photo.png'); // Default image if no photo is provided
+
   return (
     <View
       style={[
@@ -17,7 +22,7 @@ const AccountProfile = ({
         },
       ]}>
       <Image
-        source={require('../../../assets/null-photo.png')}
+        source={imageSource}
         style={{
           width: imageSize,
           height: imageSize,
