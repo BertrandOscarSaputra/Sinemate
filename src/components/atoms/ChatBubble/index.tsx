@@ -4,6 +4,8 @@ import {AccountProfile} from '../../atoms';
 
 const ChatBubble = ({
   message,
+  username,
+  profileImage,
   backgroundColor = '#000000',
   bubbleColor = '#3c3c3c',
   imageSize = 40,
@@ -16,6 +18,8 @@ const ChatBubble = ({
           imageSize={imageSize}
           fontSize={fontSize}
           backgroundColor={backgroundColor}
+          name={username}
+          photo={profileImage}
         />
         <View style={styles.bubbleWrapper}>
           {/* Tail */}
@@ -44,7 +48,7 @@ const styles = StyleSheet.create({
   bubbleWrapper: {
     position: 'relative',
     marginTop: 8,
-    marginLeft: 8,
+    marginLeft: 8 + 40 + 8, // Account for profile image width and margin
   },
   bubble: {
     maxWidth: '85%',
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
   tail: {
     position: 'absolute',
     top: -10,
-    left: 16, // Shifted slightly right from the edge
+    left: 16,
     width: 0,
     height: 0,
     borderLeftWidth: 6,
@@ -62,7 +66,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 10,
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
-    borderBottomColor: '#3c3c3c', // dynamically updated
+    borderBottomColor: '#3c3c3c',
     zIndex: 1,
   },
   messageText: {

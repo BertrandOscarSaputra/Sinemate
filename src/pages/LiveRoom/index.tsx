@@ -7,10 +7,11 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Chat} from '../../components/molecules';
-import {BackArrowLive, ChatBubble} from '../../components/atoms';
+import {ChatBubble, BackArrowLive} from '../../components/atoms';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {WebView} from 'react-native-webview';
 import {getDatabase, ref, get, set} from 'firebase/database';
+import {auth} from '../../config/Firebase';
 
 const LiveRoom = () => {
   const navigation = useNavigation();
@@ -19,7 +20,33 @@ const LiveRoom = () => {
 
   const [roomData, setRoomData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [messages, setMessages] = useState([]); // State to store chat messages
+  const [messages, setMessages] = useState([]);
+  const [userData, setUserData] = useState({
+    username: '',
+    profileImage: null,
+  });
+
+  // Fetch current user data
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const user = auth.currentUser;
+      if (user) {
+        const db = getDatabase();
+        const userRef = ref(db, `users/${user.uid}`);
+        const snapshot = await get(userRef);
+
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          setUserData({
+            username: data.username || 'Anonymous',
+            profileImage: data.profileImage || null,
+          });
+        }
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   useEffect(() => {
     const fetchRoomData = async () => {
@@ -44,16 +71,17 @@ const LiveRoom = () => {
   }, [roomCode]);
 
   const handleSendMessage = message => {
-    // Add the new message to the messages state
+    // Add the new message with user data
     setMessages(prevMessages => [
       ...prevMessages,
-      {id: prevMessages.length + 1, text: message},
+      {
+        id: prevMessages.length + 1,
+        text: message,
+        username: userData.username,
+        profileImage: userData.profileImage,
+        timestamp: new Date().toISOString(),
+      },
     ]);
-
-    // Optionally, send the message to Firebase if needed
-    // const db = getDatabase();
-    // const messagesRef = ref(db, `rooms/${roomCode}/messages`);
-    // set(messagesRef, { messages });
   };
 
   if (loading) {
@@ -72,7 +100,6 @@ const LiveRoom = () => {
     );
   }
 
-  // Function to extract the YouTube embed URL from the iframe string
   const extractYouTubeEmbedUrl = iframe => {
     const regex =
       /src="(https:\/\/www\.youtube\.com\/embed\/[\w-]{11}[\?a-zA-Z0-9=&]*)"/;
@@ -80,7 +107,6 @@ const LiveRoom = () => {
     return match ? match[1] : null;
   };
 
-  // Get the YouTube video URL from the roomData (iframe embed code)
   const videoUrl = extractYouTubeEmbedUrl(roomData.videoSource);
 
   return (
@@ -93,7 +119,7 @@ const LiveRoom = () => {
         {videoUrl ? (
           <WebView
             style={styles.webview}
-            source={{uri: videoUrl}} // Use the extracted video URL
+            source={{uri: videoUrl}}
             allowsFullscreenVideo
             mediaPlaybackRequiresUserAction={false}
           />
@@ -107,6 +133,8 @@ const LiveRoom = () => {
           <ChatBubble
             key={message.id}
             message={message.text}
+            username={message.username}
+            profileImage={message.profileImage}
             backgroundColor={'#000000'}
             bubbleColor={'#3c3c3c'}
             imageSize={40}
