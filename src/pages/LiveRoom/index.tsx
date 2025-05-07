@@ -10,7 +10,15 @@ import {Chat} from '../../components/molecules';
 import {ChatBubble, BackArrowLive} from '../../components/atoms';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {WebView} from 'react-native-webview';
-import {getDatabase, ref, get, set} from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  get,
+  set,
+  push,
+  onValue,
+  off,
+} from 'firebase/database';
 import {auth} from '../../config/Firebase';
 
 const LiveRoom = () => {
@@ -25,6 +33,35 @@ const LiveRoom = () => {
     username: '',
     profileImage: null,
   });
+
+  // Real-time message listener
+  useEffect(() => {
+    const db = getDatabase();
+    const messagesRef = ref(db, `rooms/${roomCode}/messages`);
+
+    const listener = onValue(messagesRef, snapshot => {
+      const data = snapshot.val();
+      if (data) {
+        const messagesArray = Object.entries(data).map(([key, value]) => ({
+          id: key,
+          ...value,
+        }));
+        setMessages(
+          messagesArray.sort((a, b) => {
+            const aTime = new Date(a.timestamp).getTime() || 0;
+            const bTime = new Date(b.timestamp).getTime() || 0;
+            return aTime - bTime;
+          }),
+        );
+      } else {
+        setMessages([]);
+      }
+    });
+
+    return () => {
+      off(messagesRef); // Clean up the listener
+    };
+  }, [roomCode]);
 
   // Fetch current user data
   useEffect(() => {
@@ -48,6 +85,7 @@ const LiveRoom = () => {
     fetchUserData();
   }, []);
 
+  // Fetch room data
   useEffect(() => {
     const fetchRoomData = async () => {
       try {
@@ -70,18 +108,18 @@ const LiveRoom = () => {
     fetchRoomData();
   }, [roomCode]);
 
-  const handleSendMessage = message => {
-    // Add the new message with user data
-    setMessages(prevMessages => [
-      ...prevMessages,
-      {
-        id: prevMessages.length + 1,
-        text: message,
-        username: userData.username,
-        profileImage: userData.profileImage,
-        timestamp: new Date().toISOString(),
-      },
-    ]);
+  const handleSendMessage = async message => {
+    const db = getDatabase();
+    const messagesRef = ref(db, `rooms/${roomCode}/messages`);
+    const newMessage = {
+      text: message,
+      username: userData.username,
+      profileImage: userData.profileImage,
+      timestamp: new Date().toISOString(),
+    };
+
+    // Push message to Firebase using push()
+    await push(messagesRef, newMessage);
   };
 
   if (loading) {
