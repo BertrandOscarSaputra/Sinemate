@@ -2,14 +2,15 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCgv_BWfG7iEvSsRpgJUwHBTuyBuD-l6jQ',
-  authDomain: 'sinemate-f57f8.firebaseapp.com',
-  projectId: 'sinemate-f57f8',
-  storageBucket: 'sinemate-f57f8.firebasestorage.app',
-  messagingSenderId: '674940671467',
-  appId: '1:674940671467:web:acac85feb4ffbc3acfb5ae',
-  databaseURL: 'https://sinemate-f57f8-default-rtdb.firebaseio.com/',
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
 };
+
 
 // Prevent re-initialization
 if (!firebase.apps.length) {
